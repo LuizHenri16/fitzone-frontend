@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, TextField } from "@/components"
+import { Button, SelectField, TextField } from "@/components"
 import { Formik, Form } from "formik"
 
 export const LoginForm: React.FC = () => {
@@ -15,6 +15,7 @@ export const LoginForm: React.FC = () => {
                 <Form className="p-10 flex gap-5">
                     <TextField name="username" type="select" placeholder="digite o nome de usuário" theme="lined" />
                     <TextField name="username" type="select" placeholder="digite o nome de usuário" theme="filled" />
+                    <SelectField name="select" theme="lined" options={['Selecione uma opção', 'opção 2', 'opção 3']} />
                     <Button name="botão" theme="beige"></Button>
                     <Button name="botão" theme="green"></Button>
                     <Button name="botão" theme="brown"></Button>

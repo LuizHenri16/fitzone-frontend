@@ -5,4 +5,4 @@ export {LoginForm} from './login';
 export {Button} from './button';
 
 // FORM COMPONENTS
-export {TextField} from './formikcustom/field';
+export {TextField, SelectField} from './formikcustom/field';
