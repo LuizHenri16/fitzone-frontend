@@ -18,7 +18,7 @@ const themes = {
 }
 
 export const TextField: React.FC<TextFieldProps> = ({ name, type, placeholder, theme = "filled" }) => {
-    const baseTheme = "shadow-md bg-white px-5 py-3 text-[#6B3E23] font-medium outline-none";
+    const baseTheme = "w-full shadow-md bg-white px-5 py-3 text-[#6B3E23] font-medium outline-none text-center";
     const selectedTheme = themes[theme] || themes.lined
 
     return (
@@ -39,7 +39,7 @@ interface SelectFieldProps {
 }
 
 export const SelectField: React.FC<SelectFieldProps> = ({ name, options, theme = "filled" }) => {
-    const baseTheme = "cursor-pointer shadow-md bg-white px-5 py-3 text-[#6B3E23] font-medium outline-none";
+    const baseTheme = "cursor-pointer shadow-md bg-white px-5 py-3 text-[#6B3E23] font-medium outline-none text-center";
     const selectedTheme = themes[theme] || themes.lined
 
     return (
