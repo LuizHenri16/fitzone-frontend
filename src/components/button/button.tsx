@@ -14,7 +14,7 @@ const themes = {
     }
 
 export const Button: React.FC<ButtonProps> = ({ name, type = "button", disabled = false, onClick, theme = "beige"}) => {
-    const baseClasses = 'px-5 py-3 rounded-2xl transition-colors duration-300 font-semibold cursor-pointer hover:opacity-90';
+    const baseTheme = 'shadow-md px-5 py-3 rounded-2xl transition-colors duration-300 font-semibold cursor-pointer hover:opacity-90';
     const selectedTheme = themes[theme] || themes.beige;
 
     return (
@@ -22,9 +22,8 @@ export const Button: React.FC<ButtonProps> = ({ name, type = "button", disabled 
             type={type} 
             disabled={disabled} 
             onClick={onClick}
-            className={`${baseClasses} ${selectedTheme}`}
-        >
-            {name}
+            className={`${baseTheme} ${selectedTheme}`}
+        > {name}
         </button>
     );
 }
