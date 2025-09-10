@@ -8,8 +8,8 @@ export const LoginForm: React.FC = () => {
         <Formik
             initialValues={{ username: "", password: "" }}
             onSubmit={async (values, { setSubmitting, setErrors }) => {
-            }}
-        >
+                alert("User: " + values.username + "e Password: " + values.password)
+            }} >
             {({ isSubmitting }) => (
                 <Form className="py-10 px-10 md:px-40 lg:px-20 mx-auto justify-center
                  flex flex-col gap-5 bg-[#063D38] 
