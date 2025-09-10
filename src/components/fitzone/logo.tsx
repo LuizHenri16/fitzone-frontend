@@ -1,6 +1,6 @@
 export const Logo: React.FC = () => {
-    return <div className="flex flex-col items-center py-10">
-                <img className="" src="images/Logo-image.svg" alt="Logo Fitzone"/>
-                <img className="" src="images/Textlogo-image.svg" alt="Texto da Logo Fitzone"/>
+    return <div className=" w-[18rem] md:w-[20rem] lg:w-[24rem] flex flex-col ">
+                <img src="images/Logo-image.svg" alt="Logo Fitzone"/>
+                <img src="images/Textlogo-image.svg" alt="Texto da Logo Fitzone"/>
             </div>
 }
