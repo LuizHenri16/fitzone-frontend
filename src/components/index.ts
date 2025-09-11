@@ -8,5 +8,7 @@ export {Button} from './button';
 export {TextField, SelectField} from './formikcustom/field';
 
 // FITZONE COMPONENTS
-export {Subtitle} from './fitzone/messages';
-export {Logo} from './fitzone/logo';
+export {Subtitle} from './fitzone';
+export {Logo, LogoFlexRow} from './fitzone';
+export {Template} from './fitzone';
+export {Sidebar} from "./fitzone"

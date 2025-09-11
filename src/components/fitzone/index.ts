@@ -1,2 +1,4 @@
 export {Subtitle} from "./messages";
-export {Logo} from "./logo";
+export {Logo, LogoFlexRow} from "./logo";
+export {Template} from "./Template";
+export {Sidebar} from "./sidebar"
