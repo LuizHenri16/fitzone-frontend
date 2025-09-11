@@ -4,3 +4,7 @@ export const Logo: React.FC = () => {
                 <img src="images/Textlogo-image.svg" alt="Texto da Logo Fitzone"/>
             </div>
 }
+
+export const LogoFlexRow: React.FC = () => {
+    return <img src="/images/logo-image.png" alt="imagem da logo"/>
+}
