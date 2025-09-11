@@ -7,7 +7,7 @@ export default function InicioPage() {
 
     return <div>
         <Template>
-            <div className="mt-10 flex flex-col items-center w-[15rem] lg:w-[30rem]">
+            <div className="mt-10 flex flex-col items-center w-[15rem] lg:w-[3c0rem]">
                 <LogoFlexRow />
             </div>
             <div className="grid grid-cols-2 md:gap-6 gap-3 mt-10 lg:flex">

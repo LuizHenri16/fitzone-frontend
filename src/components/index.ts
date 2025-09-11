@@ -6,6 +6,7 @@ export {Button, ShortcutButton} from './button';
 
 // FORM COMPONENTS
 export {TextField, SelectField} from './formikcustom/field';
+export {SucessMessageAlert , ErrorMessageAlert } from "./alerts"
 
 // FITZONE COMPONENTS
 export {Subtitle} from './fitzone';
