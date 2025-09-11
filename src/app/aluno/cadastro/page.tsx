@@ -1,4 +1,4 @@
-export default function CadastroAluno() {
+export default function CadastroAlunoPage() {
     return <div>
         
     </div>

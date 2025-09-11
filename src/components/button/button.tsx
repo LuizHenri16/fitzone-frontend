@@ -52,9 +52,9 @@ export const ShortcutButton: React.FC<ShortcutButtonProps> = ({urlIcon, color = 
     const selectedColor = colors[color] || colors.blue;  
     
     return (
-        <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5  flex flex-col items-center gap-2 border-3 border-[#C1C1C1] rounded-3xl shadow-md transition-colors duration-300 hover:opacity-80">
-            <img src={urlIcon} alt={altIcon} className="" />
-            <p className={`${selectedColor} ${"text-shadow-md font-bold text-sm"}`}>{name}</p>
+        <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5 lg:w-38 flex flex-col items-center gap-2 border-3 border-[#C1C1C1] rounded-3xl shadow-md transition-colors duration-300 hover:opacity-80">
+            <img src={urlIcon} alt={altIcon} className="w-8" />
+            <p className={`${selectedColor} ${"text-shadow-md font-bold text-sm lg:text-base"}`}>{name}</p>
         </button>
     )
 }

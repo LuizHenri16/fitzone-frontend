@@ -6,5 +6,5 @@ export const Logo: React.FC = () => {
 }
 
 export const LogoFlexRow: React.FC = () => {
-    return <img src="/images/logo-image.png" alt=""/>
+    return <img src="/images/logo-image.png" alt="imagem da logo"/>
 }
