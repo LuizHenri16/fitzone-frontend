@@ -7,11 +7,11 @@ export default function InicioPage() {
 
     return <div>
         <Template>
-            <div className="mt-10 flex flex-col items-center w-[15rem] lg:w-[30rem]">
+            <div className="mt-15 flex flex-col items-center w-[15rem] lg:w-[30rem]">
                 <LogoFlexRow />
             </div>
 
-            <div className="mt-10 flex flex-col gap-6 lg:flex-row">
+            <div className="mt-10 flex flex-col gap-8 lg:flex-row">
                 <BirthdayStatus />
                 <StatusCustomers />
             </div>
