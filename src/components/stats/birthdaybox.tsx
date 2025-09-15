@@ -16,6 +16,7 @@ export const BirthdayStatus = () => {
         ];
 
     useEffect(() => {
+        
         setBirthday(dataFromDB);
         // lógica para acessar o endpoint e retornar os dados do banco de dados com o nome dos aniversariantes do dia
     }, [])
