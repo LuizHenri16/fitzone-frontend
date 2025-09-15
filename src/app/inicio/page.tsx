@@ -6,7 +6,7 @@ export default function InicioPage() {
     const router = useRouter();
 
     return <div>
-        <Template>
+        <Template pageName="Início">
             <div className="mt-15 flex flex-col items-center w-[15rem] lg:w-[30rem]">
                 <LogoFlexRow />
             </div>

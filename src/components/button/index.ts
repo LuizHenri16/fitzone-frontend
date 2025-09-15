@@ -1,1 +1,1 @@
-export {Button, ShortcutButton} from './button'
+export {Button, ShortcutButton, SidebarButton} from './button'

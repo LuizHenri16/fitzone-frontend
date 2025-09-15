@@ -1,4 +1,3 @@
-import { string } from "yup";
 
 // Custom theme for buttons
 const themes = {
@@ -37,24 +36,39 @@ interface ShortcutButtonProps {
     altIcon: string,
     color?: "blue" | "cyan" | "green" | "orange",
     name: string,
-    onClick?: () => void; 
+    onClick?: () => void;
 }
 
 const colors = {
     blue: "text-[#538FC0]",
     cyan: "text-[#61C3B6]",
-    green: "text-[#018A5E]", 
+    green: "text-[#018A5E]",
     orange: "text-[#FD9467]",
 }
 
-export const ShortcutButton: React.FC<ShortcutButtonProps> = ({urlIcon, color = "blue" ,altIcon, name, onClick}) => {
-    
-    const selectedColor = colors[color] || colors.blue;  
-    
+export const ShortcutButton: React.FC<ShortcutButtonProps> = ({ urlIcon, color = "blue", altIcon, name, onClick }) => {
+
+    const selectedColor = colors[color] || colors.blue;
+
     return (
         <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5 lg:w-38 flex flex-col items-center gap-2 border-3 border-[#C1C1C1] rounded-3xl shadow-md transition-colors duration-300 hover:opacity-80">
             <img src={urlIcon} alt={altIcon} className="w-8" />
             <p className={`${selectedColor} ${"text-shadow-md font-bold text-sm lg:text-base"}`}>{name}</p>
         </button>
     )
+}
+
+interface SidebarButtonProps {
+    urlIcon: string,
+    altIcon: string,
+    name: string,
+    onClick?: () => void;
+
+}
+
+export const SidebarButton: React.FC<SidebarButtonProps> = ({ urlIcon, altIcon, name, onClick }) => {
+    return <button onClick={onClick} className=" w-full mx-auto cursor-pointer px-6 py-3 flex items-center gap-2 rounded-2xl hover:shadow-md hover:bg-[#e4e4e4] transition-colors duration-300 hover:opacity-80">
+        <img src={urlIcon} alt={altIcon} className="w-8" />
+        <p className={"text-[#7E7E7E] font-normal text-lg"}>{name}</p>
+    </button>
 }
