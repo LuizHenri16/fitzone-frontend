@@ -10,18 +10,16 @@ export const BirthdayStatus = () => {
 
     const [birthday, setBirthday] = useState<BirthdayPersonName[]>([]);
 
+    const dataFromDB: BirthdayPersonName[] = [
+            { name: "Edilene Vieira" },
+            { name: "Luiz Henrique" }
+        ];
+
     useEffect(() => {
-        const birthdayExample: BirthdayPersonName = {
-            name: "Edilene Vieira"
-        }
-
-        const birthdayExample2: BirthdayPersonName = {
-            name: "Luiz Henrique "
-        }
-
-        setBirthday([birthdayExample, birthdayExample2]);
+        
+        setBirthday(dataFromDB);
         // lógica para acessar o endpoint e retornar os dados do banco de dados com o nome dos aniversariantes do dia
-    })
+    }, [])
 
     return (
         <div className="shadow-md rounded-2xl border-2 border-[#C1C1C1] overflow-x-auto w-full mx-auto">
