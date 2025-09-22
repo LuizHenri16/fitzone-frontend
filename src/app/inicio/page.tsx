@@ -7,13 +7,13 @@ export default function InicioPage() {
 
     return <div>
         <Template>
-            <div className="flex flex-col ">
+            <div className="flex flex-col">
                 <h1 className="text-xl font-semibold self-end">Início</h1>
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center">
                     <LogoFlexRow />
                 </div>
 
-                <div className="flex flex-col gap-10 min-[640px]:flex-row mx-auto">
+                <div className="flex flex-col gap-10  mt-10 min-[640px]:flex-row mx-auto">
                     <BirthdayStatus />
                     <StatusCustomers />
                 </div>

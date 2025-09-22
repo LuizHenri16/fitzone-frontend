@@ -33,7 +33,7 @@ export const Sidebar: React.FC = () => {
 
         {isOpen && (
           <div className="fixed inset-0 bg-[#F3F3F3] bg-opacity-95 flex flex-col justify-between items-center z-50 px-5 py-5">
-            <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-2xl">
+            <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-3xl hover:text-[#c5c5c5] cursor-pointer">
               ✕
             </button>
 
