@@ -47,11 +47,11 @@ const colors = {
 }
 
 export const ShortcutButton: React.FC<ShortcutButtonProps> = ({ urlIcon, color = "blue", altIcon, name, onClick }) => {
-
     const selectedColor = colors[color] || colors.blue;
 
     return (
-        <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5 lg:w-38 flex flex-col items-center gap-2 border-3 border-[#C1C1C1] rounded-3xl shadow-md transition-colors duration-300 hover:opacity-80">
+        <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5 flex flex-col justify-center items-center gap-2 border-3 border-[#C1C1C1] rounded-3xl shadow-md transition-colors duration-300 hover:opacity-80
+                                             min-[1280px]:w-[12rem] min-[1280px]:h-[8rem]">
             <img src={urlIcon} alt={altIcon} className="w-8" />
             <p className={`${selectedColor} ${"text-shadow-md font-bold text-sm lg:text-base"}`}>{name}</p>
         </button>
@@ -67,7 +67,7 @@ interface SidebarButtonProps {
 }
 
 export const SidebarButton: React.FC<SidebarButtonProps> = ({ urlIcon, altIcon, name, onClick }) => {
-    return <button onClick={onClick} className=" w-full mx-auto cursor-pointer px-6 py-3 flex items-center gap-2 rounded-2xl hover:shadow-md hover:bg-[#e4e4e4] transition-colors duration-300 hover:opacity-80">
+    return <button onClick={onClick} className=" w-full mx-auto cursor-pointer px-4 py-3 flex items-center gap-2 rounded-2xl hover:shadow-md hover:bg-[#e4e4e4] transition-colors duration-200">
         <img src={urlIcon} alt={altIcon} className="w-8" />
         <p className={"text-[#7E7E7E] font-normal text-lg"}>{name}</p>
     </button>
