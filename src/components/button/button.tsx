@@ -17,7 +17,7 @@ interface ButtonProps {
 }
 
 export const Button: React.FC<ButtonProps> = ({ name, type = "button", disabled = false, onClick, theme = "beige" }) => {
-    const baseTheme = 'shadow-md px-5 py-3 rounded-2xl transition-colors duration-300 font-semibold cursor-pointer hover:opacity-90';
+    const baseTheme = 'w-full shadow-md px-5 py-3 rounded-2xl transition-colors duration-300 font-semibold cursor-pointer hover:opacity-90';
     const selectedTheme = themes[theme] || themes.beige;
 
     return (
@@ -50,7 +50,7 @@ export const ShortcutButton: React.FC<ShortcutButtonProps> = ({ urlIcon, color =
     const selectedColor = colors[color] || colors.blue;
 
     return (
-        <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5 flex flex-col justify-center items-center gap-2 border-3 border-[#C1C1C1] rounded-3xl shadow-md transition-colors duration-300 hover:opacity-80
+        <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5 flex flex-col justify-center items-center gap-2 border-3 border-[#C1C1C1] rounded-2xl shadow-md transition-colors duration-300 hover:opacity-80
                                              min-[1280px]:w-[12rem] min-[1280px]:h-[8rem]">
             <img src={urlIcon} alt={altIcon} className="w-8" />
             <p className={`${selectedColor} ${"text-shadow-md font-bold text-sm lg:text-base"}`}>{name}</p>

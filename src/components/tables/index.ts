@@ -1,0 +1,1 @@
+export {TableAlunos} from "./table"
