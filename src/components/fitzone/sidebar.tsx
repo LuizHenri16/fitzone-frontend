@@ -9,8 +9,11 @@ export const Sidebar: React.FC = () => {
   return (
     <>
       {/* Sidebar fixa em telas grandes */}
-      <div className="hidden md:items-center md:flex md:flex-col md:w-64 md:h-screen md:py-6 md:px-4 border-r-3 border-r-[#F3F3F3]">
-        <div className="flex flex-col gap-5">
+      <div className="hidden lg:items-center lg:flex lg:flex-col lg:w-64 lg:h-screen lg:py-6 lg:px-4 border-r-3 border-r-[#F3F3F3]">
+        <div className="w-full bg-white shadow-md rounded-2xl p-2">
+          <p className="font-bold text-lg text-[#6B3E23]">Usuário: </p>
+        </div>
+        <div className="flex flex-col gap-5 mt-auto">
           <SidebarButton name="Início" onClick={() => router.push("/inicio")} urlIcon="/icons/inicio-icon.svg" altIcon="Sidebarbutton icone" />
           <SidebarButton name="Cadastrar Aluno" onClick={() => router.push("/aluno/cadastro")} urlIcon="/icons/cadastraraluno-icon.svg" altIcon="Sidebarbutton icone" />
           <SidebarButton name="Lista de Alunos" onClick={() => router.push("/aluno")} urlIcon="/icons/listaraluno-icon.svg" altIcon="Sidebarbutton icone" />
@@ -18,13 +21,13 @@ export const Sidebar: React.FC = () => {
           <SidebarButton name="Ficha de Treino" onClick={() => router.push("/fichadetreino")} urlIcon="/icons/fichadetreino-icon.svg" altIcon="Sidebarbutton icone" />
           <SidebarButton name="Administrador" onClick={() => router.push("/administrador")} urlIcon="/icons/administrador-icon.svg" altIcon="Sidebarbutton icone" />
         </div>
-        <div className="mt-auto">
+        <div className="w-full mt-auto">
           <Button name="Sair" theme="red" onClick={() => router.push("/login")} />
         </div>
       </div>
 
       {/* Menu mobile */}
-      <div className="md:hidden w-full py-2">
+      <div className="lg:hidden w-full py-2">
         <nav className="flex justify-between text-green-900 px-4">
           <button onClick={() => setIsOpen(true)} className="hover:opacity-80 cursor-pointer">
             <img src="/icons/menu-button.svg" alt="menu-button" />
@@ -32,7 +35,7 @@ export const Sidebar: React.FC = () => {
         </nav>
 
         {isOpen && (
-          <div className="fixed inset-0 bg-[#F3F3F3] bg-opacity-95 flex flex-col justify-between items-center z-50 px-5 py-5">
+          <div className="w-full fixed inset-0 bg-[#F3F3F3] bg-opacity-95 flex flex-col justify-between items-center z-50 px-5 py-5">
             <button onClick={() => setIsOpen(false)} className="absolute top-4 right-4 text-3xl hover:text-[#c5c5c5] cursor-pointer">
               ✕
             </button>
@@ -45,8 +48,9 @@ export const Sidebar: React.FC = () => {
               <SidebarButton name="Ficha de Treino" onClick={() => router.push("/fichadetreino")} urlIcon="/icons/fichadetreino-icon.svg" altIcon="Sidebarbutton icone" />
               <SidebarButton name="Administrador" onClick={() => router.push("/administrador")} urlIcon="/icons/administrador-icon.svg" altIcon="Sidebarbutton icone" />
             </div>
-
-            <Button name="Sair" theme="red" onClick={() => router.push("/login")} />
+            <div className="w-full">
+              <Button name="Sair" theme="red" onClick={() => router.push("/login")} />
+            </div>
           </div>
         )}
       </div>

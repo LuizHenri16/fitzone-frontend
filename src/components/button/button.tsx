@@ -9,15 +9,15 @@ const themes = {
 
 // Button Coponent
 interface ButtonProps {
-    name: string;
-    type?: "button" | "submit" | "reset";
-    disabled?: boolean;
-    onClick?: () => void;
+    name: string,
+    type?: "button" | "submit" | "reset",
+    disabled?: boolean,
+    onClick?: () => void,
     theme?: "beige" | "green" | "red" | "brown";
 }
 
 export const Button: React.FC<ButtonProps> = ({ name, type = "button", disabled = false, onClick, theme = "beige" }) => {
-    const baseTheme = 'shadow-md px-5 py-3 rounded-2xl transition-colors duration-300 font-semibold cursor-pointer hover:opacity-90';
+    const baseTheme = 'w-full shadow-md px-5 py-3 rounded-2xl transition-colors duration-300 font-semibold cursor-pointer hover:opacity-90';
     const selectedTheme = themes[theme] || themes.beige;
 
     return (
@@ -50,7 +50,7 @@ export const ShortcutButton: React.FC<ShortcutButtonProps> = ({ urlIcon, color =
     const selectedColor = colors[color] || colors.blue;
 
     return (
-        <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5 flex flex-col justify-center items-center gap-2 border-3 border-[#C1C1C1] rounded-3xl shadow-md transition-colors duration-300 hover:opacity-80
+        <button onClick={onClick} className="cursor-pointer p-2 w-34 py-5 flex flex-col justify-center items-center gap-2 border-3 border-[#C1C1C1] rounded-2xl shadow-md transition-colors duration-300 hover:opacity-80
                                              min-[1280px]:w-[12rem] min-[1280px]:h-[8rem]">
             <img src={urlIcon} alt={altIcon} className="w-8" />
             <p className={`${selectedColor} ${"text-shadow-md font-bold text-sm lg:text-base"}`}>{name}</p>
@@ -70,5 +70,28 @@ export const SidebarButton: React.FC<SidebarButtonProps> = ({ urlIcon, altIcon, 
     return <button onClick={onClick} className=" w-full mx-auto cursor-pointer px-4 py-3 flex items-center gap-2 rounded-2xl hover:shadow-md hover:bg-[#e4e4e4] transition-colors duration-200">
         <img src={urlIcon} alt={altIcon} className="w-8" />
         <p className={"text-[#7E7E7E] font-normal text-lg"}>{name}</p>
+    </button>
+}
+
+interface ActionButtonProps{
+    action?: "delete" | "edit",
+    onClick?: () => void;
+}
+
+export const ActionButton: React.FC<ActionButtonProps> = ({action = "delete", onClick}) => {
+    const ActionIcons = {
+        delete: {
+            icon: "",
+            alt: ""
+        },
+        edit: {
+            icon: "",
+            alt: ""
+        }
+    }
+    const SelectedActionIcon = ActionIcons[action] || ActionIcons["delete"]
+ 
+    return <button onClick={onClick}>
+        <img src={SelectedActionIcon.icon} alt={SelectedActionIcon.alt} className="w-8" />
     </button>
 }

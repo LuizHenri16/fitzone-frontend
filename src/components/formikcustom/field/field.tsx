@@ -1,12 +1,14 @@
 'use client'
 
-import { Field } from "formik";
+import { InputMask } from "@react-input/mask";
+import { Field, useField } from "formik";
 
 
 // Text Field Component
 interface TextFieldProps {
     name: string;
     label?: string;
+    mask?: string;
     type: string;
     htmlFor?: string,
     placeholder: string
@@ -19,19 +21,34 @@ const themes = {
     filled: "rounded-2xl",
 }
 
-export const TextField: React.FC<TextFieldProps> = ({ name, htmlFor, label, type, placeholder, theme = "filled" }) => {
+export const TextField: React.FC<TextFieldProps> = ({ name, htmlFor, label, type, placeholder, theme = "filled", mask }) => {
+    const [field, meta, helpers] = useField(name);
     const baseTheme = "w-full shadow-md bg-white px-5 py-3 text-[#6B3E23] font-medium outline-none text-center";
     const selectedTheme = themes[theme] || themes.lined
     const labelColor = theme === "filled" ? "text-[#FFF9ED]" : "text-[#6B3E23]"
 
     return (
-        <div>
-            <label htmlFor={htmlFor} className={`${labelColor} ${"font-bold"}`}> {label} </label>
-            <Field
-                className={`${baseTheme} ${selectedTheme}`}
-                name={name} type={type} placeholder={placeholder}>
-            </Field>
-        </div>
+        <div className="flex flex-col items-start gap-1">
+            <label htmlFor={htmlFor} className={`${labelColor} ${"font-bold text-lg"}` }> {label} </label>
+            {mask ? (
+                <InputMask
+                    mask={mask}
+                    replacement={{ X: /\d/ }}
+                    value={field.value || ''}
+                    onChange={(e) => helpers.setValue(e.target.value)}
+                    onBlur={() => helpers.setTouched(true)}
+                    placeholder={placeholder}
+                    className={`${baseTheme} ${selectedTheme}`}
+                />
+            ) : (
+                <Field
+                    id={htmlFor}
+                    className={`${baseTheme} ${selectedTheme}`}
+                    name={name} type={type} placeholder={placeholder}>
+                </Field>
+            )
+            }
+        </div >
     )
 }
 
@@ -45,13 +62,13 @@ interface SelectFieldProps {
 }
 
 export const SelectField: React.FC<SelectFieldProps> = ({ name, label, htmlFor, options, theme = "filled" }) => {
-    const baseTheme = "cursor-pointer shadow-md bg-white px-5 py-3 text-[#6B3E23] font-medium outline-none text-center";
+    const baseTheme = "w-full cursor-pointer shadow-md bg-white px-5 py-3 text-[#6B3E23] font-medium outline-none text-center";
     const selectedTheme = themes[theme] || themes.lined
-     const labelColor = theme === "filled" ? "text-[#FFF9ED]" : "text-[#6B3E23]"
+    const labelColor = theme === "filled" ? "text-[#FFF9ED]" : "text-[#6B3E23]"
 
     return (
-        <div>
-            <label htmlFor={htmlFor} className={`${labelColor} ${"font-bold"}`}> {label} </label>
+        <div className="flex flex-col items-start gap-1">
+             <label htmlFor={htmlFor} className={`${labelColor} ${"font-bold text-lg"}` }> {label} </label>
             <Field
                 as="select"
                 className={`${baseTheme} ${selectedTheme}`}
@@ -64,4 +81,4 @@ export const SelectField: React.FC<SelectFieldProps> = ({ name, label, htmlFor, 
             </Field>
         </div>
     )
-}   
+}

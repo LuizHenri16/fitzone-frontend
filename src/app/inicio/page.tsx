@@ -1,9 +1,11 @@
 'use client'
-import { BirthdayStatus, LogoFlexRow, ShortcutButton, StatusCustomers, Template } from "@/components";
+import { BirthdayStatus, ClienteModalForm, LogoFlexRow, ShortcutButton, StatusCustomers, Template } from "@/components";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function InicioPage() {
     const router = useRouter();
+    const [clienteCadastroModalIsOpen, setClienteCadastroModalIsOpen] = useState(false);
 
     return <div>
         <Template>
@@ -19,12 +21,15 @@ export default function InicioPage() {
                 </div>
 
                 <div className="grid grid-cols-2 min-[640px]:grid-cols-4 custom-grid mx-auto md:flex md:justify-around lg:justify-between gap-4 mt-5 ">
-                    <ShortcutButton color="blue"
-                        urlIcon="/icons/cadastraraluno-icon.svg"
-                        name="Cadastrar Aluno"
-                        altIcon="icone"
-                        onClick={() => { router.push("/aluno/cadastro") }}
-                    />
+                    <div>
+                        <ShortcutButton color="blue"
+                            urlIcon="/icons/cadastraraluno-icon.svg"
+                            name="Cadastrar Aluno"
+                            altIcon="icone"
+                            onClick={() => { setClienteCadastroModalIsOpen(true)}}
+                        />
+                        <ClienteModalForm isOpen={clienteCadastroModalIsOpen} onClose={()=> setClienteCadastroModalIsOpen(false)} />
+                    </div>
                     <ShortcutButton
                         color="orange"
                         urlIcon="/icons/listaraluno-icon.svg"
