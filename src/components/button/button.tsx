@@ -9,10 +9,10 @@ const themes = {
 
 // Button Coponent
 interface ButtonProps {
-    name: string;
-    type?: "button" | "submit" | "reset";
-    disabled?: boolean;
-    onClick?: () => void;
+    name: string,
+    type?: "button" | "submit" | "reset",
+    disabled?: boolean,
+    onClick?: () => void,
     theme?: "beige" | "green" | "red" | "brown";
 }
 
@@ -70,5 +70,28 @@ export const SidebarButton: React.FC<SidebarButtonProps> = ({ urlIcon, altIcon, 
     return <button onClick={onClick} className=" w-full mx-auto cursor-pointer px-4 py-3 flex items-center gap-2 rounded-2xl hover:shadow-md hover:bg-[#e4e4e4] transition-colors duration-200">
         <img src={urlIcon} alt={altIcon} className="w-8" />
         <p className={"text-[#7E7E7E] font-normal text-lg"}>{name}</p>
+    </button>
+}
+
+interface ActionButtonProps{
+    action?: "delete" | "edit",
+    onClick?: () => void;
+}
+
+export const ActionButton: React.FC<ActionButtonProps> = ({action = "delete", onClick}) => {
+    const ActionIcons = {
+        delete: {
+            icon: "",
+            alt: ""
+        },
+        edit: {
+            icon: "",
+            alt: ""
+        }
+    }
+    const SelectedActionIcon = ActionIcons[action] || ActionIcons["delete"]
+ 
+    return <button onClick={onClick}>
+        <img src={SelectedActionIcon.icon} alt={SelectedActionIcon.alt} className="w-8" />
     </button>
 }

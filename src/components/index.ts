@@ -2,7 +2,7 @@
 export {LoginForm} from './login';
 
 // BUTTON COMPONENT
-export {Button, ShortcutButton, SidebarButton} from './button';
+export {Button, ShortcutButton, SidebarButton, ActionButton} from './button';
 
 // FORM COMPONENTS
 export {TextField, SelectField} from './formikcustom/field';
