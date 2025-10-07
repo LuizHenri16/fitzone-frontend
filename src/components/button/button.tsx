@@ -63,11 +63,11 @@ interface SidebarButtonProps {
     altIcon: string,
     name: string,
     onClick?: () => void;
-
+    onAbrirModal?: () => void;
 }
 
-export const SidebarButton: React.FC<SidebarButtonProps> = ({ urlIcon, altIcon, name, onClick }) => {
-    return <button onClick={onClick} className=" w-full mx-auto cursor-pointer px-4 py-3 flex items-center gap-2 rounded-2xl hover:shadow-md hover:bg-[#e4e4e4] transition-colors duration-200">
+export const SidebarButton: React.FC<SidebarButtonProps> = ({ urlIcon, altIcon, name, onClick, onAbrirModal }) => {
+    return <button onClick={onClick || onAbrirModal} className=" w-full mx-auto cursor-pointer px-4 py-3 flex items-center gap-2 rounded-2xl hover:shadow-md hover:bg-[#e4e4e4] transition-colors duration-200">
         <img src={urlIcon} alt={altIcon} className="w-8" />
         <p className={"text-[#7E7E7E] font-normal text-lg"}>{name}</p>
     </button>

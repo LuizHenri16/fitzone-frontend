@@ -4,16 +4,14 @@ import { Sidebar } from "@/components"
 interface TemplateProps {
     children?: React.ReactNode
     pagename?: string
+    onAbrirModal?: () => void;
 }
-7
 
-
-
-export const Template: React.FC<TemplateProps> = ({ children, pagename }) => {
+export const Template: React.FC<TemplateProps> = ({ children, pagename, onAbrirModal }) => {
 
     return (
         <div className="flex flex-col lg:flex-row min-h-screen">
-                <Sidebar />    
+                <Sidebar onAbrirModal={onAbrirModal}/>    
                 <main className="flex-1 justify-center  p-6 w-full text-right">
                     <h2 className="font-bold text-3xl text-[#116343]">{pagename}</h2>   
                     <div className="mt-10 md:px-5 lg:px-20">
