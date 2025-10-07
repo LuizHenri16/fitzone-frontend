@@ -51,7 +51,7 @@ export const TableAlunos: React.FC = () => {
                                         <td className="font-medium px-4 py-4 ">{aluno.telefone}</td>
                                         <td className="font-medium px-4 py-4 ">{aluno.telefoneEmergencia}</td>
                                         <td className="font-medium px-4 py-4 ">{aluno.status}</td>
-                                        <td className="font-medium px-4 py-4 ">
+                                        <td className="w-full flex justify-center gap-2 items-center font-medium px-4 py-4 ">
                                             <ActionButton action="edit" onClick={console.log} />
                                             <ActionButton action="delete" onClick={console.log} />
                                         </td>
