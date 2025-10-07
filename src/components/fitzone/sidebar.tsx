@@ -3,7 +3,11 @@ import { Button, SidebarButton } from "../button";
 import { useState } from "react";
 import { ClienteModalForm } from "../forms";
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  onAbrirModal?: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
   const [clienteCadastroModalIsOpen, setClienteCadastroModalIsOpen] = useState(false);
@@ -17,11 +21,7 @@ export const Sidebar: React.FC = () => {
         </div>
         <div className="flex flex-col gap-5 mt-auto">
           <SidebarButton name="Início" onClick={() => router.push("/inicio")} urlIcon="/icons/inicio-icon.svg" altIcon="Sidebarbutton icone" />
-            <div className="w-full">
-              <SidebarButton name="Cadastrar Aluno" onClick={() => { setClienteCadastroModalIsOpen(true)}} urlIcon="/icons/cadastraraluno-icon.svg" altIcon="Sidebarbutton icone" />
-              <ClienteModalForm isOpen={clienteCadastroModalIsOpen} onClose={() => setClienteCadastroModalIsOpen(false)} />
-            </div>
-          
+          <SidebarButton name="Cadastrar Aluno" onAbrirModal={onAbrirModal} urlIcon="/icons/cadastraraluno-icon.svg" altIcon="Sidebarbutton icone" />
           <SidebarButton name="Lista de Alunos" onClick={() => router.push("/aluno")} urlIcon="/icons/listaraluno-icon.svg" altIcon="Sidebarbutton icone" />
           <SidebarButton name="Financeiro" onClick={() => router.push("/financeiro")} urlIcon="/icons/financeiro-icon.svg" altIcon="Sidebarbutton icone" />
           <SidebarButton name="Ficha de Treino" onClick={() => router.push("/fichadetreino")} urlIcon="/icons/fichadetreino-icon.svg" altIcon="Sidebarbutton icone" />
@@ -52,10 +52,7 @@ export const Sidebar: React.FC = () => {
 
             <div className="flex flex-col items-center gap-5 mt-10 w-full max-w-md">
               <SidebarButton name="Início" onClick={() => router.push("/inicio")} urlIcon="/icons/inicio-icon.svg" altIcon="Sidebarbutton icone" />
-              <div className="w-full">
-                <SidebarButton name="Cadastrar Aluno" onClick={() => { setClienteCadastroModalIsOpen(true) }} urlIcon="/icons/cadastraraluno-icon.svg" altIcon="Sidebarbutton icone" />
-                <ClienteModalForm isOpen={clienteCadastroModalIsOpen} onClose={() => setClienteCadastroModalIsOpen(false)} />
-              </div>
+              <SidebarButton name="Cadastrar Aluno" onClick={onAbrirModal} urlIcon="/icons/cadastraraluno-icon.svg" altIcon="Sidebarbutton icone" />
               <SidebarButton name="Lista de Alunos" onClick={() => router.push("/aluno")} urlIcon="/icons/listaraluno-icon.svg" altIcon="Sidebarbutton icone" />
               <SidebarButton name="Financeiro" onClick={() => router.push("/financeiro")} urlIcon="/icons/financeiro-icon.svg" altIcon="Sidebarbutton icone" />
               <SidebarButton name="Ficha de Treino" onClick={() => router.push("/fichadetreino")} urlIcon="/icons/fichadetreino-icon.svg" altIcon="Sidebarbutton icone" />

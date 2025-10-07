@@ -8,7 +8,7 @@ export default function InicioPage() {
     const [clienteCadastroModalIsOpen, setClienteCadastroModalIsOpen] = useState(false);
 
     return <div>
-        <Template>
+        <Template onAbrirModal={() => setClienteCadastroModalIsOpen(true)} pagename="Início">
             <div className="flex flex-col">
                 <h1 className="text-xl font-semibold self-end">Início</h1>
                 <div className="flex justify-center">
