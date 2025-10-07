@@ -21,7 +21,11 @@ export const LoginForm: React.FC = () => {
                 })
             }   
             onSubmit={async (values, { setSubmitting, setErrors }) => {
-                router.push("/inicio");
+                setSuccessMessage("Login realizado com sucesso!");
+                setTimeout(() => {
+                   router.push("/inicio");
+                }, 1000);
+                 
             }} >
             {({ isSubmitting }) => (
                 <Form className="py-10 px-10 md:px-40 lg:px-20 mx-auto justify-center
@@ -38,6 +42,7 @@ export const LoginForm: React.FC = () => {
                             <ErrorMessageAlert name="password" component='div' />
                         </div>
                         <Button name="login" type="submit" disabled={isSubmitting} theme="beige"/>
+                        {SucessMessage&& <SucessMessageAlert SuccessMessage={SucessMessage}/>}
                     </div>
                 </Form>
             )}
