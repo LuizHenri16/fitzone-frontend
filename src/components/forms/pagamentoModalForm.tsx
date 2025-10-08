@@ -55,7 +55,7 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
                                             <TextField label="Matricula" name="matricula" theme="lined" placeholder="" type="password" />
                                         </div>
                                         <div>
-                                            <TextField label="Valor" name="valor" theme="lined" placeholder="" type="password" />
+                                            <TextField label="Valor" name="valor" theme="lined" placeholder="" type="number" />
                                         </div>
                                         <div>
                                             <TextField label="Novo Pagamento" name="novoPagamento" theme="lined" placeholder="" type="text" />
@@ -63,7 +63,6 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
                                     </Form>
                                 )}
                             </Formik>
-
                             <div className="mt-5 flex flex-col gap-4 md:flex-row">
                                 <Button name="Confirmar" type="submit" theme="brown"></Button>
                                 <Button name="Cancelar" theme="beige" onClick={onClose} />
