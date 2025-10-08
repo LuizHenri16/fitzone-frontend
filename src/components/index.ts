@@ -7,7 +7,7 @@ export {Button, ShortcutButton, SidebarButton, ActionButton} from './button';
 // FORM COMPONENTS
 export {TextField, SelectField} from './formikcustom/field';
 export {SucessMessageAlert , ErrorMessageAlert } from "./alerts"
-export { ClienteModalForm, UsuarioModalForm } from "./forms"
+export { ClienteModalForm, UsuarioModalForm, PagamentoModalForm, DespesaModalForm } from "./forms"
 
 
 // FITZONE COMPONENTS

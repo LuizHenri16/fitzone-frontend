@@ -1,8 +1,12 @@
 'use client'
 
-import { Button, TableDespesas, TablePagamentos, Template } from "@/components";
+import { Button, DespesaModalForm, PagamentoModalForm, TableDespesas, TablePagamentos, Template } from "@/components";
+import { useState } from "react";
 
 export default function FinanceiroPage() {
+    const [pagamentoCadastroModalIsOpen, setPagamentoCadastroModalIsOpen] = useState(false);
+    const [despesaCadastroModalIsOpen, setDespesaCadastroModalIsOpen] = useState(false);    
+
     return (
         <Template pagename="Financeiro">
             <div>
@@ -14,7 +18,8 @@ export default function FinanceiroPage() {
                 <TablePagamentos />
                 <div className="w-full flex flex-col mt-6 gap-5 md:flex-row lg:justify-end">
                     <div className="w-full lg:w-[20rem]">
-                        <Button name="Cadastrar Pagamento" theme="green" type="button" />
+                        <Button name="Cadastrar Pagamento" theme="green" type="button" onClick={() => {setPagamentoCadastroModalIsOpen(true)}}/>
+                        <PagamentoModalForm isOpen={pagamentoCadastroModalIsOpen} onClose={() => setPagamentoCadastroModalIsOpen(false)} />
                     </div>
                 </div>
             </div>
@@ -24,7 +29,8 @@ export default function FinanceiroPage() {
                 <TableDespesas />
                 <div className="w-full flex flex-col mt-6 gap-5 md:flex-row lg:justify-end">
                     <div className="w-full lg:w-[20rem]">
-                        <Button name="Cadastrar Despesa" theme="red" type="button" />
+                        <Button name="Cadastrar Despesa" theme="red" type="button" onClick={() => {setDespesaCadastroModalIsOpen(true)}}/>
+                        <DespesaModalForm isOpen={despesaCadastroModalIsOpen} onClose={() => setDespesaCadastroModalIsOpen(false)} />
                     </div>
                 </div>
             </div>
