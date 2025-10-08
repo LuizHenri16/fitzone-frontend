@@ -1,1 +1,2 @@
-export {TableAlunos} from "./table"
+export {TableAlunos} from "./aluno"
+export {TableUsuarios} from "./usuario";

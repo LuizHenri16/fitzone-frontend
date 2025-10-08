@@ -15,10 +15,11 @@ export const ClienteModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
         <div >
             {isOpen && (
                 <div>
-                    <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/20">
+                    <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/20 backdrop-blur-sm">
                         <div className="w-full max-w-[50rem] bg-[#F3F3F3] rounded-2xl shadow-2xl px-6 py-8 max-h-[90vh] overflow-y-auto">
-                            <div className="mb-5">
+                            <div className="mb-6 flex justify-between">
                                 <h2 className="font-bold text-3xl text-[#116343]">Cadastrar Aluno</h2>   
+                                <button onClick={onClose} className="text-3xl hover:text-[#c5c5c5] cursor-pointer">✕</button>
                             </div>
                             <Formik
                                 initialValues={

@@ -92,7 +92,7 @@ export const ActionButton: React.FC<ActionButtonProps> = ({ action = "delete", o
     const SelectedActionIcon = ActionIcons[action] || ActionIcons["delete"]
 
     return (
-        <button className="hover:opacity-90 hover:shadow-md cursor-pointer" onClick={onClick}>
+        <button className="hover:opacity-80 cursor-pointer" onClick={onClick}>
             <img src={SelectedActionIcon.icon} alt={SelectedActionIcon.alt} className="w-5" />
         </button>
     )

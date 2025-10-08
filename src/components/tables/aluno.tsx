@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { ActionButton } from "../button";
+import { Spinner } from "../fitzone";
 
 interface Aluno {
     id?: string,
@@ -13,7 +14,7 @@ interface Aluno {
 export const TableAlunos: React.FC = () => {
 
     const [loadingTable, setLoadingTable] = useState(false);
-    const [alunos, setAlunos] = useState<Aluno[]>([{ id: "1", nome: "Luiz", cpf: "021.311.314-23", telefone: "71 983214-4144", telefoneEmergencia: "71 983214-4144", status: "Ativo" }])
+    const [alunos, setAlunos] = useState<Aluno[]>([{ id: "1", nome: "Luiz Henrique", cpf: "021.311.314-23", telefone: "71 983214-4144", telefoneEmergencia: "71 983214-4144", status: "Ativo" }])
 
     return (
         <div >
@@ -35,7 +36,7 @@ export const TableAlunos: React.FC = () => {
 
                         {loadingTable ? (
                             <tr >
-                                <td colSpan={7} className="text-center py-4">carregando dados</td>
+                                <td colSpan={7} className="text-center py-4"><Spinner /></td>
                             </tr>
                         )
                             : (alunos.length === 0 ? (
@@ -50,8 +51,8 @@ export const TableAlunos: React.FC = () => {
                                         <td className="font-medium px-4 py-4 ">{aluno.cpf}</td>
                                         <td className="font-medium px-4 py-4 ">{aluno.telefone}</td>
                                         <td className="font-medium px-4 py-4 ">{aluno.telefoneEmergencia}</td>
-                                        <td className="font-medium px-4 py-4 ">{aluno.status}</td>
-                                        <td className="w-full flex justify-center gap-2 items-center font-medium px-4 py-4 ">
+                                        <td className={`font-bold ${aluno.status === 'Ativo' && 'text-green-900'} ${aluno.status === 'Inativo' && 'text-red-900'}`}>{aluno.status}</td>
+                                        <td className="w-full flex justify-center gap-3 items-center font-medium px-4 py-4 ">
                                             <ActionButton action="edit" onClick={console.log} />
                                             <ActionButton action="delete" onClick={console.log} />
                                         </td>
@@ -59,7 +60,6 @@ export const TableAlunos: React.FC = () => {
                                 ))
                             )
                         }
-
                     </tbody>
                 </table>
             </div>

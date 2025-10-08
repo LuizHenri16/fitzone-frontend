@@ -8,7 +8,6 @@ interface TemplateProps {
 }
 
 export const Template: React.FC<TemplateProps> = ({ children, pagename, onAbrirModal }) => {
-
     return (
         <div className="flex flex-col lg:flex-row min-h-screen">
                 <Sidebar onAbrirModal={onAbrirModal}/>    
