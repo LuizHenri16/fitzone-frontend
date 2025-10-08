@@ -10,7 +10,6 @@ export default function InicioPage() {
     return <div>
         <Template onAbrirModal={() => setClienteCadastroModalIsOpen(true)} pagename="Início">
             <div className="flex flex-col">
-                <h1 className="text-xl font-semibold self-end">Início</h1>
                 <div className="flex justify-center">
                     <LogoFlexRow />
                 </div>

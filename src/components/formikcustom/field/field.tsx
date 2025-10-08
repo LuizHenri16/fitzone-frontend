@@ -11,7 +11,7 @@ interface TextFieldProps {
     mask?: string;
     type: string;
     htmlFor?: string,
-    placeholder: string
+    placeholder?: string
     theme?: "lined" | "filled";
 }
 
