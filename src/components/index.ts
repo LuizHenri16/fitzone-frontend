@@ -19,4 +19,4 @@ export {Spinner} from "./fitzone"
 export {BirthdayStatus, StatusCustomers} from "./stats"
 
 // TABLES COMPONENT
-export {TableAlunos, TableUsuarios} from "./tables"
+export {TableAlunos, TableUsuarios, TablePagamentos, TableDespesas} from "./tables"

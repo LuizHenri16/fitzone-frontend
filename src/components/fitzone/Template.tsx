@@ -11,8 +11,8 @@ export const Template: React.FC<TemplateProps> = ({ children, pagename, onAbrirM
     return (
         <div className="flex flex-col lg:flex-row min-h-screen">
                 <Sidebar onAbrirModal={onAbrirModal}/>    
-                <main className="flex-1 justify-center  p-6 w-full text-right">
-                    <h2 className="font-bold text-3xl text-[#116343]">{pagename}</h2>   
+                <main className="flex-1 justify-center  p-6 w-full ">
+                    <h2 className="font-bold text-3xl text-right text-[#116343]">{pagename}</h2>   
                     <div className="mt-10 md:px-5 lg:px-20">
                         {children}
                     </div> 
