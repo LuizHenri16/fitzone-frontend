@@ -1,9 +1,11 @@
 import { useState } from "react"
 import { ActionButton } from "../button";
 import { Spinner } from "../fitzone";
+import { ClienteEditarModalForm } from "../forms";
+import { ModalConfirm } from "../alerts";
 
 interface Aluno {
-    id?: string,
+    id: string,
     nome?: string,
     cpf?: string,
     telefone?: string,
@@ -15,6 +17,20 @@ export const TableAlunos: React.FC = () => {
 
     const [loadingTable, setLoadingTable] = useState(false);
     const [alunos, setAlunos] = useState<Aluno[]>([{ id: "1", nome: "Luiz Henrique", cpf: "021.311.314-23", telefone: "71 983214-4144", telefoneEmergencia: "71 983214-4144", status: "Ativo" }])
+    const [ClienteEditarModalIsOpen, setClienteEditarModalIsOpen] = useState(false);
+    const [alunoDeletar, setAlunoDeletar] = useState<Aluno | null>(null)
+
+     const deletarAluno = async (id: string) => {
+        try {
+            setLoadingTable(true);
+            // Aqui terá a chamada de deletar o aluno
+        } catch (error) {
+            
+        } finally {
+            setLoadingTable(false);
+            setAlunoDeletar(null);
+        }
+    }  
 
     return (
         <div >
@@ -53,8 +69,17 @@ export const TableAlunos: React.FC = () => {
                                         <td className="font-medium px-4 py-4 ">{aluno.telefoneEmergencia}</td>
                                         <td className={`font-bold ${aluno.status === 'Ativo' && 'text-green-900'} ${aluno.status === 'Inativo' && 'text-red-900'}`}>{aluno.status}</td>
                                         <td className="w-full flex justify-center gap-3 items-center font-medium px-4 py-4 ">
-                                            <ActionButton action="edit" onClick={console.log} />
-                                            <ActionButton action="delete" onClick={console.log} />
+                                            <ActionButton action="edit" onClick={() => setClienteEditarModalIsOpen(true)} />
+                                            <ClienteEditarModalForm isOpen={ClienteEditarModalIsOpen} onClose={() => setClienteEditarModalIsOpen(false)} idAluno={aluno.id} />
+
+                                            <ActionButton action="delete" onClick={() => setAlunoDeletar(aluno)} />
+                                            <ModalConfirm isOpen={alunoDeletar !== null} title={`Deseja excluir o usuário ${aluno?.nome}`} message="Esta ação não pode ser desfeita." onConfirm={() => {
+                                                if (alunoDeletar) {
+                                                    deletarAluno(alunoDeletar.id);
+                                                }
+                                            }} onCancel={() => {
+                                                setAlunoDeletar(null);
+                                            }} />
                                         </td>
                                     </tr>
                                 ))

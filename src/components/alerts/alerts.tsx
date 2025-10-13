@@ -58,10 +58,7 @@ export const ModalConfirm: React.FC<ModalConfirm> = ({ title, message, onConfirm
             <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/30 backdrop-blur-sm">
                 <div className="relative bg-[#f3f3f3] rounded-lg ">
                     <div className="px-8 py-6 md:p-6 text-center">
-                        <svg className="mx-auto mb-4 text-[#B23C3C] w-11"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
+                        <svg className="mx-auto mb-4 text-[#B23C3C] w-11" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 20 20">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                 d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>

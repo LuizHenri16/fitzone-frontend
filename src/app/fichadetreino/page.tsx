@@ -39,6 +39,7 @@ export default function FichaDeTreinoPage() {
         printWindow?.document.close()
         printWindow?.focus()
         printWindow?.print()
+        printWindow?.document.close()
     }
 
     return (
