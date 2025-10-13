@@ -1,7 +1,6 @@
 import { useRouter } from "next/navigation";
 import { Button, SidebarButton } from "../button";
 import { useState } from "react";
-import { ClienteModalForm } from "../forms";
 
 interface SidebarProps {
   onAbrirModal?: () => void;
@@ -15,7 +14,7 @@ export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
   return (
     <>
       {/* Sidebar fixa em telas grandes */}
-      <div className="hidden lg:items-center lg:flex lg:flex-col lg:w-64 lg:h-screen lg:py-6 lg:px-4 border-r-3 border-r-[#F3F3F3]">
+      <div className="hidden lg:items-center lg:flex lg:flex-col lg:w-64 lg:py-6 lg:px-4 border-r-3 border-r-[#F3F3F3]">
         <div className="w-full bg-white shadow-md rounded-2xl p-2">
           <p className="font-bold text-lg text-[#6B3E23]">Usuário: </p>
         </div>

@@ -1,14 +1,17 @@
 'use client'
 
-import { Button, DespesaModalForm, PagamentoModalForm, TableDespesas, TablePagamentos, Template, TotalDespesasBox, TotalPagamentosBox, TotalReceitaBox } from "@/components";
+import { Button, ClienteModalForm, DespesaModalForm, PagamentoModalForm, TableDespesas, TablePagamentos, Template, TotalDespesasBox, TotalPagamentosBox, TotalReceitaBox } from "@/components";
 import { useState } from "react";
 
 export default function FinanceiroPage() {
     const [pagamentoCadastroModalIsOpen, setPagamentoCadastroModalIsOpen] = useState(false);
     const [despesaCadastroModalIsOpen, setDespesaCadastroModalIsOpen] = useState(false);
+    const [clienteCadastroModalIsOpen, setClienteCadastroModalIsOpen] = useState(false);
 
     return (
-        <Template pagename="Financeiro">
+        <Template pagename="Financeiro" onAbrirModal={() => setClienteCadastroModalIsOpen(true)}>
+            <ClienteModalForm isOpen={clienteCadastroModalIsOpen} onClose={() => setClienteCadastroModalIsOpen(false)} />
+                
             <div className="flex flex-col gap-4">
                 <h2 className="font-bold text-[#6B3E23]">Resumo Geral</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
