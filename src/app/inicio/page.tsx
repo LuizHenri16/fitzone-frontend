@@ -8,27 +8,26 @@ export default function InicioPage() {
     const [clienteCadastroModalIsOpen, setClienteCadastroModalIsOpen] = useState(false);
 
     return <div>
+        <ClienteModalForm isOpen={clienteCadastroModalIsOpen} onClose={() => setClienteCadastroModalIsOpen(false)} />
         <Template onAbrirModal={() => setClienteCadastroModalIsOpen(true)} pagename="Início">
-            <div className="flex flex-col">
-                <div className="flex justify-center">
+            <div className="flex flex-col justify-center items-center gap-5
+            ">
+                <div className="">
                     <LogoFlexRow />
                 </div>
 
-                <div className="flex flex-col gap-10  mt-10 min-[640px]:flex-row mx-auto">
+                <div className="w-full flex flex-col lg:flex-row gap-6 mt-5">
                     <BirthdayStatus />
                     <StatusCustomers />
                 </div>
 
-                <div className="grid grid-cols-2 min-[640px]:grid-cols-4 custom-grid mx-auto md:flex md:justify-around lg:justify-between gap-4 mt-5 ">
-                    <div>
-                        <ShortcutButton color="blue"
-                            urlIcon="/icons/cadastraraluno-icon.svg"
-                            name="Cadastrar Aluno"
-                            altIcon="icone"
-                            onClick={() => { setClienteCadastroModalIsOpen(true)}}
-                        />
-                        <ClienteModalForm isOpen={clienteCadastroModalIsOpen} onClose={()=> setClienteCadastroModalIsOpen(false)} />
-                    </div>
+                <div className="w-full grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4 mt-5 ">
+                    <ShortcutButton color="blue"
+                        urlIcon="/icons/cadastraraluno-icon.svg"
+                        name="Cadastrar Aluno"
+                        altIcon="icone"
+                        onClick={() => { setClienteCadastroModalIsOpen(true) }}
+                    />
                     <ShortcutButton
                         color="orange"
                         urlIcon="/icons/listaraluno-icon.svg"

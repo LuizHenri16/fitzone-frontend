@@ -1,6 +1,6 @@
 'use client'
 
-import { ActionButton, Spinner } from "@/components";
+import { ActionButton, ModalConfirm, Spinner, UsuarioEditarModalForm } from "@/components";
 import { useState } from "react";
 
 interface Usuario {
@@ -12,6 +12,21 @@ interface Usuario {
 export const TableUsuarios: React.FC = () => {
     const [loadingTable, setLoadingTable] = useState(false);
     const [usuarios, setUsuarios] = useState<Usuario[]>([{ id: "1", nome: "Luiz Henrique", nivelAcesso: "Total" }])
+    const [UsuarioEditarModalIsOpen, setUsuarioEditarModalIsOpen] = useState(false);
+    const [UsuarioDeletar, setUsuarioDeletar] = useState<Usuario | null>(null);
+
+
+    const deletarUsuario = async (id: string) => {
+        try {
+            setLoadingTable(true);
+            // Aqui terá a chamada de deletar usuário
+        } catch (error) {
+            
+        } finally {
+            setLoadingTable(false);
+            setUsuarioDeletar(null);
+        }
+    }  
 
     return (
         <div >
@@ -44,8 +59,17 @@ export const TableUsuarios: React.FC = () => {
                                         <td className="font-medium px-4 py-4 ">{usuario.nome}</td>
                                         <td className="font-medium px-4 py-4 ">{usuario.nivelAcesso}</td>
                                         <td className="w-full flex justify-center gap-3 items-center font-medium px-4 py-4 ">
-                                            <ActionButton action="edit" onClick={console.log} />
-                                            <ActionButton action="delete" onClick={console.log} />
+                                            <ActionButton action="edit" onClick={() => setUsuarioEditarModalIsOpen(true)} />
+                                            <UsuarioEditarModalForm isOpen={UsuarioEditarModalIsOpen} onClose={() => setUsuarioEditarModalIsOpen(false)} usuario={usuario} />
+
+                                            <ActionButton action="delete" onClick={() => { setUsuarioDeletar(usuario) }} />
+                                            <ModalConfirm isOpen={UsuarioDeletar !== null} title={`Deseja excluir o usuário ${UsuarioDeletar?.nome}`} message="Esta ação não pode ser desfeita." onConfirm={() => {
+                                                if (UsuarioDeletar) {
+                                                    deletarUsuario(UsuarioDeletar.id)
+                                                 }
+                                             }} onCancel={() => {
+                                                    setUsuarioDeletar(null);
+                                                }} />
                                         </td>
                                     </tr>
                                 ))

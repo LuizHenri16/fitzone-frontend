@@ -2,6 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup"
 import { SelectField, TextField } from "../formikcustom/field";
 import { Button } from "../button";
+import { ErrorMessageAlert } from "../alerts";
 
 interface ModalProps {
     isOpen: boolean,
@@ -23,19 +24,19 @@ export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                             <Formik
                                 initialValues={
                                     {
-                                        name: "", senha: "", confirmarSenha: "", nivelAcesso: ""
+                                        nome: "", senha: "", confirmaSenha: "", nivelAcesso: ""
                                     }}
                                 validationSchema={
                                     Yup.object(
                                         {
-                                            name: Yup.string().required("Campo de nome obrigatório"),
+                                            nome: Yup.string().required("Campo de nome obrigatório"),
                                             senha: Yup.string().required("Campo de senha obrigatório"),
-                                            confirmarSenha: Yup.string().oneOf([Yup.ref('senha'), undefined], 'As senhas devem corresponder').required('Confirmação de senha é obrigatória'),
+                                            confirmaSenha: Yup.string().oneOf([Yup.ref('senha'), undefined], 'As senhas devem corresponder').required('Confirmação de senha é obrigatória'),
                                             nivelAcesso: Yup.string().oneOf(["Total", "Parcial"], "Selecione um nível de acesso")
                                         }
                                     )}
                                 onSubmit={
-                                    async (values, { setSubmitting , resetForm }) => {
+                                    async (values, { setSubmitting, setErrors,resetForm }) => {
                                         setSubmitting(true);
                                         try {
 
@@ -49,16 +50,20 @@ export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                 {({ isSubmitting }) => (
                                     <Form className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div>
-                                            <TextField label="Nome de Usuário" name="name" theme="lined" placeholder="Digite o nome do aluno" type="text" />
+                                            <TextField label="Nome de Usuário" name="nome" theme="lined" placeholder="Digite o nome do aluno" type="text" />
+                                            <ErrorMessageAlert name="nome" component='div' />
                                         </div>
                                         <div>
                                             <TextField label="Senha" name="senha" theme="lined" placeholder="Digite o nome do aluno" type="password" />
+                                             <ErrorMessageAlert name="senha" component='div' />
                                         </div>
                                         <div>
-                                            <TextField label="Confirmar Senha" name="confirmSenha" theme="lined" placeholder="Digite o nome do aluno" type="password" />
+                                            <TextField label="Confirmar Senha" name="confirmaSenha" theme="lined" placeholder="Digite o nome do aluno" type="password" />
+                                             <ErrorMessageAlert name="confirmaSenha" component='div' />
                                         </div>
                                         <div className="">
-                                            <SelectField theme="lined" name="matricula" htmlFor="matricula" label="Nível de Acesso" options={[ "Selecionar","Total", "Parcial"]} />
+                                            <SelectField theme="lined" name="nivelAcesso" htmlFor="nivelAcesso" label="Nível de Acesso" options={[ "Selecionar","Total", "Parcial"]} />
+                                             <ErrorMessageAlert name="nivelAcesso" component='div' />
                                         </div>
                                     </Form>
                                 )}
