@@ -2,6 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup"
 import { SelectField, TextField } from "../formikcustom/field";
 import { Button } from "../button";
+import { ErrorMessageAlert } from "../alerts";
 
 interface Usuario {
     id: string;
@@ -57,15 +58,19 @@ export const UsuarioEditarModalForm: React.FC<ModalProps> = ({ isOpen = false, o
                                     <Form className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div>
                                             <TextField label="Nome de Usuário" name="nome" theme="lined" placeholder="Digite o nome do aluno" type="text" />
+                                            <ErrorMessageAlert name="nome" component='div' />
                                         </div>
                                         <div>
                                             <TextField label="Senha" name="senha" theme="lined" placeholder="Digite o nome do aluno" type="password" />
+                                            <ErrorMessageAlert name="senha" component='div' />
                                         </div>
                                         <div>
                                             <TextField label="Confirmar Senha" name="confirmaSenha" theme="lined" placeholder="Digite o nome do aluno" type="password" />
+                                            <ErrorMessageAlert name="confirmaSenha" component='div' />
                                         </div>
                                         <div className="">
-                                            <SelectField theme="lined" name="nivelAcesso" htmlFor="matricula" label="Nível de Acesso" options={[ "Selecionar","Total", "Parcial"]} />
+                                            <SelectField theme="lined" name="nivelAcesso" htmlFor="nivelAcesso" label="Nível de Acesso" options={[ "Selecionar","Total", "Parcial"]} />
+                                            <ErrorMessageAlert name="nivelAcesso" component='div' />
                                         </div>
                                     </Form>
                                 )}
