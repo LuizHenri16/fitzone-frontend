@@ -2,6 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup"
 import { SelectField, TextField } from "../formikcustom/field";
 import { Button } from "../button";
+import { ErrorMessageAlert } from "../alerts";
 
 interface ModalProps {
     isOpen: boolean,
@@ -49,17 +50,19 @@ export const DespesaModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                     <Form className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                         <div>
                                             <TextField label="Descrição da Despesa" name="descricao" theme="lined" placeholder="Digite a descrição" type="text" />
+                                            <ErrorMessageAlert name="descricao" component="div"/>
                                         </div>
                                         <div>
                                             <TextField label="Valor" name="valor" theme="lined" placeholder="R$ 0.00" type="number" />
+                                            <ErrorMessageAlert name="valor" component="div"/>
                                         </div>
                                         <div>
                                             <TextField label="Data da Despesa" name="data" theme="lined" placeholder="Digite a data" type="password" />
+                                            <ErrorMessageAlert name="data" component="div"/>
                                         </div>
                                     </Form>
                                 )}
                             </Formik>
-
                             <div className="mt-5 flex flex-col gap-4 md:flex-row">
                                 <Button name="Confirmar" type="submit" theme="brown"></Button>
                                 <Button name="Cancelar" theme="beige" onClick={onClose} />
