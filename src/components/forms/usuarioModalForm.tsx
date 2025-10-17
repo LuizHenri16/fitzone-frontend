@@ -36,7 +36,7 @@ export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                         }
                                     )}
                                 onSubmit={
-                                    async (values, { setSubmitting, setErrors,resetForm }) => {
+                                    async (values, { setSubmitting, setErrors, resetForm }) => {
                                         setSubmitting(true);
                                         try {
 

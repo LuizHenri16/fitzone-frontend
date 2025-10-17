@@ -39,11 +39,10 @@ git clone https://github.com/LuizHenri16/fitzone-frontend
 ```
 
 No diretório do projeto execute:
-Após isso digite:
 ```bash
  npm install
 ```
-para baixar as depêndencias do projeto.
+para baixar as dependências do projeto.
 
 Após isso digite:
 ```bash
