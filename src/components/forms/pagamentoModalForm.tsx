@@ -2,6 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup"
 import { SelectField, TextField } from "../formikcustom/field";
 import { Button } from "../button";
+import { ErrorMessageAlert } from "../alerts";
 
 interface ModalProps {
     isOpen: boolean,
@@ -25,15 +26,6 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
                                     {
                                         ultimoPagamento: "", matricula: "", data: "", dataNovoPagamento: ""
                                     }}
-                                validationSchema={
-                                    Yup.object(
-                                        {
-                                            ultimoPagamento: Yup.string().required("Campo de nome obrigatório"),
-                                            matricula: Yup.string().required("Campo de senha obrigatório"),
-                                            data: Yup.string().required("Campo de senha obrigatório"),
-                                            dataNovoPagamento: Yup.string().required("Campo de senha obrigatório"),
-                                        }
-                                    )}
                                 onSubmit={
                                     async (values, { setSubmitting, resetForm }) => {
                                         setSubmitting(true);

@@ -18,6 +18,28 @@ export const SucessMessageAlert: React.FC<SucessMessageProps> = ({ SuccessMessag
     )
 }
 
+export const MessageAlertModal: React.FC<ModalConfirm> = ({ isOpen, onCancel, title, message }) => {
+    return (
+        <div className={`${isOpen ? 'flex' : 'hidden'}
+                         overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center cursor-default items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}>
+
+            <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/30 backdrop-blur-sm">
+                <div className="relative bg-[#f3f3f3] rounded-lg ">
+                    <div className="px-8 py-6 md:p-6 text-center">
+                        <h3 className={`font-bold ${title === 'Sucesso' && 'text-green-900'} ${title === 'Erro' && 'text-red-900'}`}>
+                            {title}
+                        </h3>
+                        <p className="mb-5 text-md text-[#6b3f23bd]">{message}</p>
+                        <div className='flex gap-4'>Sucess
+                            <Button theme='red' onClick={onCancel} name='fechar' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 interface ErrorMessageProps {
     name: string,
     component?: React.ElementType
@@ -61,7 +83,7 @@ export const ModalConfirm: React.FC<ModalConfirm> = ({ title, message, onConfirm
                         <svg className="mx-auto mb-4 text-[#B23C3C] w-11" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 20 20">
                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                         <h3 className="mb-3 text-lg font-normal text-gray-900">
                             {title}
