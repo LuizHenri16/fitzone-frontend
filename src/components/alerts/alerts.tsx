@@ -24,13 +24,13 @@ export const MessageAlertModal: React.FC<ModalConfirm> = ({ isOpen, onCancel, ti
                          overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center cursor-default items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}>
 
             <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/30 backdrop-blur-sm">
-                <div className="relative bg-[#f3f3f3] rounded-lg ">
-                    <div className="px-8 py-6 md:p-6 text-center">
-                        <h3 className={`font-bold ${title === 'Sucesso' && 'text-green-900'} ${title === 'Erro' && 'text-red-900'}`}>
+                <div className="relative bg-[#f3f3f3] rounded-lg px-4 py-1">
+                    <div className="px-8 py-6 md:p-6 flex flex-col justify-center items-center text-center">
+                        <h3 className={`font-bold text-lg ${title === 'Sucesso' && 'text-green-900'} ${title === 'Erro' && 'text-red-900'}`}>
                             {title}
                         </h3>
-                        <p className="mb-5 text-md text-[#6b3f23bd]">{message}</p>
-                        <div className='flex gap-4'>Sucess
+                        <p className="mb-5 text-lg text-[#6b3f23bd]">{message}</p>
+                        <div className='flex gap-4 w-[6rem]'>
                             <Button theme='red' onClick={onCancel} name='fechar' />
                         </div>
                     </div>
@@ -67,8 +67,8 @@ export const ErrorMessageAlert: React.FC<ErrorMessageProps> = ({ name, component
 interface ModalConfirm {
     title?: string,
     message?: string,
-    onConfirm: () => void,
-    onCancel: () => void,
+    onConfirm?: () => void,
+    onCancel?: () => void,
     isOpen: boolean,
 }
 
