@@ -99,3 +99,51 @@ export const ModalConfirm: React.FC<ModalConfirm> = ({ title, message, onConfirm
         </div>
     )
 }
+
+interface NotificationModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    title: string;
+    message: string;
+    isSuccess: boolean;
+    onConfirmSuccess?: () => void;
+}
+
+export const NotificationModal: React.FC<NotificationModalProps> = ({
+    isOpen,
+    onClose,
+    title,
+    message,
+    isSuccess,
+    onConfirmSuccess
+}) => {
+    if (!isOpen) return null;
+
+    const handleButtonClick = () => {
+        onClose();
+        if (isSuccess && onConfirmSuccess) {
+            onConfirmSuccess();
+        }
+    };
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30">
+            <div className="bg-[#F3F3F3] rounded-2xl p-8 w-full max-w-sm shadow-lg border-t-8">
+                <div className="flex justify-between items-start mb-4">
+                    <h2 className={`text-xl font-bold ${isSuccess ? 'text-[#05674B]' : 'text-[#B23C3C]'}`}>{title}</h2>
+                    <button onClick={onClose} className="text-3xl hover:text-[#c5c5c5] cursor-pointer">✕</button>
+                </div>
+
+                <div className="text-gray-700 mt-4 mb-8">
+                    <p>{message}</p>
+                </div>
+
+                <div className="flex justify-center">
+                    <div className="w-full max-w-[12rem]">
+                        <Button name="Fechar" onClick={handleButtonClick} theme="red"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};

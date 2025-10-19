@@ -11,7 +11,7 @@ export const BirthdayStatus = () => {
     const [birthday, setBirthday] = useState<BirthdayPersonName[]>([]);
 
     const dataFromDB: BirthdayPersonName[] = [
-            { name: "Edilene Vieira" },
+            { name: "Maria Clara" },
             { name: "Luiz Henrique" }
         ];
 
