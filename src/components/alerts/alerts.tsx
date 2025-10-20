@@ -24,13 +24,13 @@ export const MessageAlertModal: React.FC<ModalConfirm> = ({ isOpen, onCancel, ti
                          overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center cursor-default items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}>
 
             <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/30 backdrop-blur-sm">
-                <div className="relative bg-[#f3f3f3] rounded-lg ">
-                    <div className="px-8 py-6 md:p-6 text-center">
-                        <h3 className={`font-bold ${title === 'Sucesso' && 'text-green-900'} ${title === 'Erro' && 'text-red-900'}`}>
+                <div className="relative bg-[#f3f3f3] rounded-lg px-4 py-1">
+                    <div className="px-8 py-6 md:p-6 flex flex-col justify-center items-center text-center">
+                        <h3 className={`font-bold text-lg ${title === 'Sucesso' && 'text-green-900'} ${title === 'Erro' && 'text-red-900'}`}>
                             {title}
                         </h3>
-                        <p className="mb-5 text-md text-[#6b3f23bd]">{message}</p>
-                        <div className='flex gap-4'>Sucess
+                        <p className="mb-5 text-lg text-[#6b3f23bd]">{message}</p>
+                        <div className='flex gap-4 w-[6rem]'>
                             <Button theme='red' onClick={onCancel} name='fechar' />
                         </div>
                     </div>
@@ -67,8 +67,8 @@ export const ErrorMessageAlert: React.FC<ErrorMessageProps> = ({ name, component
 interface ModalConfirm {
     title?: string,
     message?: string,
-    onConfirm: () => void,
-    onCancel: () => void,
+    onConfirm?: () => void,
+    onCancel?: () => void,
     isOpen: boolean,
 }
 
@@ -99,3 +99,51 @@ export const ModalConfirm: React.FC<ModalConfirm> = ({ title, message, onConfirm
         </div>
     )
 }
+
+interface NotificationModalProps {
+    isOpen: boolean;
+    onClose: () => void;
+    title: string;
+    message: string;
+    isSuccess: boolean;
+    onConfirmSuccess?: () => void;
+}
+
+export const NotificationModal: React.FC<NotificationModalProps> = ({
+    isOpen,
+    onClose,
+    title,
+    message,
+    isSuccess,
+    onConfirmSuccess
+}) => {
+    if (!isOpen) return null;
+
+    const handleButtonClick = () => {
+        onClose();
+        if (isSuccess && onConfirmSuccess) {
+            onConfirmSuccess();
+        }
+    };
+
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/30">
+            <div className="bg-[#F3F3F3] rounded-2xl p-8 w-full max-w-sm shadow-lg border-t-8">
+                <div className="flex justify-between items-start mb-4">
+                    <h2 className={`text-xl font-bold ${isSuccess ? 'text-[#05674B]' : 'text-[#B23C3C]'}`}>{title}</h2>
+                    <button onClick={onClose} className="text-3xl hover:text-[#c5c5c5] cursor-pointer">✕</button>
+                </div>
+
+                <div className="text-gray-700 mt-4 mb-8">
+                    <p>{message}</p>
+                </div>
+
+                <div className="flex justify-center">
+                    <div className="w-full max-w-[12rem]">
+                        <Button name="Fechar" onClick={handleButtonClick} theme="red"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};

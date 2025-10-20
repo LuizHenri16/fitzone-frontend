@@ -6,7 +6,7 @@ export {Button, ShortcutButton, SidebarButton, ActionButton} from './button';
 
 // FORM COMPONENTS
 export {TextField, SelectField} from './formikcustom/field';
-export {SucessMessageAlert , ErrorMessageAlert , ModalConfirm} from "./alerts"
+export {SucessMessageAlert , ErrorMessageAlert , ModalConfirm, MessageAlertModal} from "./alerts"
 export { ClienteModalForm, UsuarioModalForm, PagamentoModalForm, DespesaModalForm , UsuarioEditarModalForm, ClienteEditarModalForm} from "./forms"
 
 

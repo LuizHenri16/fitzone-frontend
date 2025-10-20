@@ -1,1 +1,1 @@
-export {SucessMessageAlert, ErrorMessageAlert, ModalConfirm} from "./alerts"
+export {SucessMessageAlert, ErrorMessageAlert, ModalConfirm, MessageAlertModal} from "./alerts"
