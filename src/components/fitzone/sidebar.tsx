@@ -9,11 +9,11 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
   const [clienteCadastroModalIsOpen, setClienteCadastroModalIsOpen] = useState(false);
 
   return (
     <>
-      {/* Sidebar fixa em telas grandes */}
       <div className="hidden lg:items-center lg:flex lg:flex-col lg:w-64 lg:py-6 lg:px-4 border-r-3 border-r-[#F3F3F3]">
         <div className="w-full bg-white shadow-md rounded-2xl p-2">
           <p className="font-bold text-lg text-[#6B3E23]">Usuário: </p>
@@ -31,7 +31,6 @@ export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
         </div>
       </div>
 
-      {/* Menu mobile */}
       <div className="lg:hidden w-full py-2">
         <nav className="flex justify-between text-green-900 px-4">
           <button onClick={() => setIsOpen(true)} className="hover:opacity-80 cursor-pointer">

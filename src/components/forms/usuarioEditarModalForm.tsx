@@ -22,7 +22,7 @@ export const UsuarioEditarModalForm: React.FC<ModalProps> = ({ isOpen = false, o
         <div >
             {isOpen && (
                 <div>
-                    <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/20 backdrop-blur-sm">
+                    <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/10 backdrop-blur-sm">
                         <div className="w-full max-w-[50rem] bg-[#F3F3F3] rounded-2xl shadow-2xl px-6 py-8 max-h-[90vh] overflow-y-auto">
                             <div className="mb-6 flex justify-between">
                                 <h2 className="font-bold text-3xl text-[#116343]">Editar Dados do Usuário</h2>   

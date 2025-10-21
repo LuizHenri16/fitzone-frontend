@@ -77,8 +77,8 @@ export const ModalConfirm: React.FC<ModalConfirm> = ({ title, message, onConfirm
         <div className={`${isOpen ? 'flex' : 'hidden'}
                          overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center cursor-default items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}>
 
-            <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/30 backdrop-blur-sm">
-                <div className="relative bg-[#f3f3f3] rounded-lg ">
+            <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/10 backdrop-blur-md">
+                <div className="relative bg-[#f3f3f3] rounded-lg shadow-2xl">
                     <div className="px-8 py-6 md:p-6 text-center">
                         <svg className="mx-auto mb-4 text-[#B23C3C] w-11" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 20 20">
