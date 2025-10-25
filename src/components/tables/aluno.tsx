@@ -4,6 +4,7 @@ import { Spinner } from "../fitzone";
 import { ClienteEditarModalForm } from "../forms";
 import { MessageAlertModal, ModalConfirm } from "../alerts";
 import axios from "axios";
+import api from "@/services/api";
 
 interface Aluno {
     id: string;
@@ -59,7 +60,7 @@ export const TableAlunos: React.FC = () => {
         const pageSize = 10;
 
         try {
-            const response = await axios.get("http://localhost:8080/customer", {
+            const response = await api.get("/customer", {
                 params: { page, size: pageSize },
             });
 

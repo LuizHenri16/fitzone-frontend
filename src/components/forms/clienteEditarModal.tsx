@@ -5,6 +5,7 @@ import { SelectField, TextField } from "../formikcustom/field";
 import { useEffect, useState } from "react";
 import { ErrorMessageAlert } from "../alerts";
 import axios from "axios";
+import api from "@/services/api";
 
 interface ModalProps {
     isOpen: boolean;
@@ -47,8 +48,8 @@ export const ClienteEditarModalForm: React.FC<ModalProps> = ({
     useEffect(() => {
         if (idAluno) {
             setLoading(true);
-            axios
-                .get(`http://localhost:8080/customer/${idAluno}`)
+            api
+                .get(`/customer/${idAluno}`)
                 .then((response) => {
                     setAlunoEditar(response.data);
                 })

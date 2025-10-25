@@ -3,6 +3,7 @@ import * as Yup from "yup"
 import { SelectField, TextField } from "../formikcustom/field";
 import { Button } from "../button";
 import { ErrorMessageAlert } from "../alerts";
+import api from "@/services/api";
 
 interface ModalProps {
     isOpen: boolean,
@@ -37,14 +38,7 @@ export const DespesaModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                 onSubmit={
                                     async (values, { setSubmitting, resetForm }) => {
                                         setSubmitting(true);
-                                        try {
-
-                                            resetForm()
-                                        } catch (error: any) {
-
-                                        } finally {
-
-                                        }
+                                        
                                     }}>
                                 {({ isSubmitting }) => (
                                     <Form className="grid grid-cols-1 md:grid-cols-2 gap-5">

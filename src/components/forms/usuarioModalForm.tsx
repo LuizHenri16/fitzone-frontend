@@ -3,6 +3,8 @@ import * as Yup from "yup"
 import { SelectField, TextField } from "../formikcustom/field";
 import { Button } from "../button";
 import { ErrorMessageAlert } from "../alerts";
+import api from "@/services/api";
+import { useState } from "react";
 
 interface ModalProps {
     isOpen: boolean,
@@ -10,6 +12,12 @@ interface ModalProps {
 }
 
 export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose }) => {
+    const [SucessMessage, setSuccessMessage] = useState("");
+    const [SuccessMessageModalIsOpen, setSuccessMessageModalIsOpen] = useState(false);
+
+    const [ErrorMessage, setErrorMessage] = useState("");
+    const [ErrorMessageModalIsOpen, setErrorMessageModalIsOpen] = useState(false);
+
     if (!isOpen) return null;
     return (
         <div >
@@ -36,16 +44,28 @@ export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                         }
                                     )}
                                 onSubmit={
-                                    async (values, { setSubmitting, setErrors, resetForm }) => {
+                                    async (values, { setSubmitting, resetForm }) => {
                                         setSubmitting(true);
-                                        try {
+                                        api.post("/user", values)
+                                            .then(response => {
+                                                setSuccessMessage("Usuário cadastrado com sucesso");
+                                                setSuccessMessageModalIsOpen(true);
 
-                                            resetForm()
-                                        } catch (error: any) {
+                                                resetForm();
+                                                setSubmitting(false);
 
-                                        } finally {
-
-                                        }
+                                                setTimeout(() => {
+                                                    onClose();
+                                                    setSuccessMessageModalIsOpen(false)
+                                                }, 2000);
+                                            })
+                                            .catch(error => {
+                                                if (error.response) {
+                                                    const message = error.response.data?.message || "Erro desconhecido";
+                                                    setErrorMessage(message);
+                                                    setErrorMessageModalIsOpen(true);
+                                                }
+                                            })
                                     }}>
                                 {({ isSubmitting }) => (
                                     <Form className="">
