@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { SelectField, TextField } from "../formikcustom/field";
 import { ErrorMessageAlert, MessageAlertModal } from "../alerts";
 import axios from "axios";
+import api from "@/services/api";
 
 interface ModalProps {
     isOpen: boolean;
@@ -54,7 +55,7 @@ export const ClienteModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                         onSubmit={async (values, { setSubmitting, resetForm }) => {
                             setSubmitting(true);
 
-                            axios.post("http://localhost:8080/customer", values)
+                            api.post("/customer", values)
                                 .then(response => {
                                     setSuccessMessage("Aluno cadastrado com sucesso");
                                     setSuccessMessageModalIsOpen(true);
