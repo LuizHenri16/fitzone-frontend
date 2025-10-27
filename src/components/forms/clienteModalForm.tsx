@@ -4,7 +4,6 @@ import { Button } from "../button";
 import * as Yup from "yup";
 import { SelectField, TextField } from "../formikcustom/field";
 import { ErrorMessageAlert, MessageAlertModal } from "../alerts";
-import axios from "axios";
 import api from "@/services/api";
 
 interface ModalProps {
