@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ErrorMessageAlert, MessageAlertModal } from "../alerts";
 import api from "@/services/api";
 import { formatIsoToMaskedDate } from "@/services/format/formatDate";
+import { useRouter } from "next/navigation";
 
 
 interface ModalProps {
@@ -17,7 +18,7 @@ interface ModalProps {
 interface Aluno {
     id: number;
     name: string;
-    cpf?: string; 
+    cpf?: string;
     birthday: string;
     customerContact: {
         telephoneValue: string;
@@ -130,22 +131,23 @@ export const ClienteEditarModalForm: React.FC<ModalProps> = ({ isOpen = false, o
 
                             api.put(`/customer/${idAluno}`, submitValues)
                                 .then(response => {
-                                    setSuccessMessage("Aluno editado com sucesso");
-                                    setSuccessMessageModalIsOpen(true);
+                                    if (response.status === 200) {
+                                        setSuccessMessage("Aluno editado com sucesso");
+                                        setSuccessMessageModalIsOpen(true);
 
-                                    resetForm();
-                                    setSubmitting(false);
+                                        resetForm();
+                                        setSubmitting(false);
+                                        setTimeout(() => {
+                                            onClose();
+                                            setSuccessMessageModalIsOpen(false)
 
-                                    setTimeout(() => {
-                                        onClose();
-                                        setSuccessMessageModalIsOpen(false)
-                                    }, 2000);
-
+                                        }, 2000);
+                                    }
                                 })
                                 .catch(error => {
                                     setSubmitting(false);
                                     if (error.response) {
-                                        const message = error.response.data?.error || "Erro desconhecido ao editar o aluno. Verifique os logs do servidor.";
+                                        const message = error.response.data?.error || "Erro desconhecido ao editar o aluno.";
                                         setErrorMessage(message);
                                         setErrorMessageModalIsOpen(true);
                                     } else {

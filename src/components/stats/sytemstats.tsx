@@ -1,3 +1,4 @@
+import api from "@/services/api";
 import { useEffect, useState } from "react"
 
 export const StatusCustomers = () => {
@@ -6,10 +7,21 @@ export const StatusCustomers = () => {
     const [registeredCustomers, setRegisteredCustomers] = useState(0);
 
     useEffect(() => {
-        setRegisteredCustomers(20);
-        setActiveCustomers(10)
+        api.get("/customer/activecustomers")
+            .then(response => {
+                setActiveCustomers(response.data)
+            })
+            .catch(error => {
 
-        // Lógica para atualizar os useState com os dados de alunos registrados e Ativos
+            })
+
+        api.get("/customer/registeredcustomers")
+            .then(response => {
+                setRegisteredCustomers(response.data)
+            })
+            .catch(error => {
+
+            })
     })
 
     return (

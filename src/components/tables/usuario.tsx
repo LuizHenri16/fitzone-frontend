@@ -1,35 +1,68 @@
 'use client'
 
-import { ActionButton, ModalConfirm, Spinner, UsuarioEditarModalForm } from "@/components";
-import { useState } from "react";
+import { ActionButton, ModalConfirm, Spinner, UsuarioEditarModalForm, MessageAlertModal } from "@/components";
+import api from "@/services/api";
+import { useEffect, useState } from "react";
 
 interface Usuario {
-    id: string,
-    nome: string,
-    nivelAcesso: string,
+    id: string;
+    username: string;
+    access: string;
 }
 
 export const TableUsuarios: React.FC = () => {
-    const [loadingTable, setLoadingTable] = useState(false);
-    const [usuarios, setUsuarios] = useState<Usuario[]>([{ id: "1", nome: "Luiz Henrique", nivelAcesso: "Total" }])
-    const [UsuarioEditarModalIsOpen, setUsuarioEditarModalIsOpen] = useState(false);
-    const [UsuarioDeletar, setUsuarioDeletar] = useState<Usuario | null>(null);
+    const [loadingTable, setLoadingTable] = useState(true);
+    const [usuarios, setUsuarios] = useState<Usuario[]>([]);
 
+    const [usuarioSelecionadoParaEdicao, setUsuarioSelecionadoParaEdicao] = useState<Usuario | null>(null);
+    const [usuarioParaDeletar, setUsuarioParaDeletar] = useState<Usuario | null>(null);
 
-    const deletarUsuario = async (id: string) => {
+    const [successMessage, setSuccessMessage] = useState("");
+    const [successMessageModalIsOpen, setSuccessMessageModalIsOpen] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessageModalIsOpen, setErrorMessageModalIsOpen] = useState(false);
+
+    const fetchUsuarios = async () => {
+        setLoadingTable(true);
         try {
-            setLoadingTable(true);
-            // Aqui terá a chamada de deletar usuário
+            const response = await api.get("/user");
+            setUsuarios(response.data);
         } catch (error) {
-            
+            console.error("Erro ao buscar usuários:", error);
+            setErrorMessage("Erro ao carregar a lista de usuários.");
+            setErrorMessageModalIsOpen(true);
         } finally {
             setLoadingTable(false);
-            setUsuarioDeletar(null);
         }
-    }  
+    }
 
+    useEffect(() => {
+        fetchUsuarios();
+    }, []);
+
+    const deletarUsuario = async (id: string) => {
+        setUsuarioParaDeletar(null);
+        setLoadingTable(true);
+
+        api.delete(`/user/${id}`)
+            .then(response => {
+                if (response.status === 200) {
+                    setSuccessMessage("Usuário deletado com sucesso.");
+                    setSuccessMessageModalIsOpen(true);
+                    fetchUsuarios();
+                }
+            })
+            .catch(error => {
+                setErrorMessage("Ocorreu um erro ao deletar o usuário");
+                setErrorMessageModalIsOpen(true);
+            })
+
+
+
+
+    };
     return (
-        <div >
+        <div>
             <div className="shadow-md rounded-2xl border border-zinc-300 overflow-x-auto w-full mx-auto p-5">
                 <table className="w-full table-auto">
                     <thead className="text-center">
@@ -42,42 +75,74 @@ export const TableUsuarios: React.FC = () => {
                     </thead>
 
                     <tbody className="text-center">
-
                         {loadingTable ? (
-                            <tr >
-                                <td colSpan={7} className="text-center py-4"><Spinner /></td>
+                            <tr>
+                                <td colSpan={4} className="text-center py-4"><Spinner /></td>
                             </tr>
-                        )
-                            : (usuarios.length === 0 ? (
-                                <tr >
-                                    <td colSpan={7} className="text-center py-4">Nenhum aluno encontrado</td>
+                        ) : usuarios.length === 0 ? (
+                            <tr>
+                                <td colSpan={4} className="text-center py-4">Nenhum usuário encontrado</td>
+                            </tr>
+                        ) : (
+                            usuarios.map((usuario) => (
+                                <tr key={usuario.id} className="bg-white transition-colors cursor-pointer">
+                                    <td className="font-semibold px-4 py-4 ">{usuario.id}</td>
+                                    <td className="font-medium px-4 py-4 ">{usuario.username}</td>
+                                    <td className="font-medium px-4 py-4 ">{usuario.access}</td>
+                                    <td className="w-full flex justify-center gap-3 items-center font-medium px-4 py-4 ">
+                                        <ActionButton
+                                            action="edit"
+                                            onClick={() => setUsuarioSelecionadoParaEdicao(usuario)}
+                                        />
+                                        <ActionButton
+                                            action="delete"
+                                            onClick={() => setUsuarioParaDeletar(usuario)}
+                                        />
+                                    </td>
                                 </tr>
-                            ) :
-                                usuarios.map((usuario, index) => (
-                                    <tr key={index} className="bg-white transition-colors cursor-pointer">
-                                        <td className="font-semibold px-4 py-4 ">{usuario.id}</td>
-                                        <td className="font-medium px-4 py-4 ">{usuario.nome}</td>
-                                        <td className="font-medium px-4 py-4 ">{usuario.nivelAcesso}</td>
-                                        <td className="w-full flex justify-center gap-3 items-center font-medium px-4 py-4 ">
-                                            <ActionButton action="edit" onClick={() => setUsuarioEditarModalIsOpen(true)} />
-                                            <UsuarioEditarModalForm isOpen={UsuarioEditarModalIsOpen} onClose={() => setUsuarioEditarModalIsOpen(false)} usuario={usuario} />
-
-                                            <ActionButton action="delete" onClick={() => { setUsuarioDeletar(usuario) }} />
-                                            <ModalConfirm isOpen={UsuarioDeletar !== null} title={`Deseja excluir o usuário ${UsuarioDeletar?.nome}`} message="Esta ação não pode ser desfeita." onConfirm={() => {
-                                                if (UsuarioDeletar) {
-                                                    deletarUsuario(UsuarioDeletar.id)
-                                                 }
-                                             }} onCancel={() => {
-                                                    setUsuarioDeletar(null);
-                                                }} />
-                                        </td>
-                                    </tr>
-                                ))
-                            )
-                        }
+                            ))
+                        )}
                     </tbody>
                 </table>
             </div>
+
+            {usuarioSelecionadoParaEdicao && (
+                <UsuarioEditarModalForm
+                    isOpen={true}
+                    onClose={() => setUsuarioSelecionadoParaEdicao(null)}
+                    usuario={usuarioSelecionadoParaEdicao}
+                    onSuccess={() => fetchUsuarios()}
+                />
+            )}
+
+            {usuarioParaDeletar && (
+                <ModalConfirm
+                    isOpen={true}
+                    title={`Deseja excluir o usuário ${usuarioParaDeletar.username}?`}
+                    message="Esta ação não pode ser desfeita."
+                    onConfirm={() => deletarUsuario(usuarioParaDeletar.id)}
+                    onCancel={() => setUsuarioParaDeletar(null)}
+                />
+            )}
+
+
+            {successMessageModalIsOpen && (
+                <MessageAlertModal
+                    title="Sucesso"
+                    message={successMessage}
+                    isOpen={true}
+                    onCancel={() => setSuccessMessageModalIsOpen(false)}
+                />
+            )}
+
+            {errorMessageModalIsOpen && (
+                <MessageAlertModal
+                    title="Erro"
+                    message={errorMessage}
+                    isOpen={true}
+                    onCancel={() => setErrorMessageModalIsOpen(false)}
+                />
+            )}
         </div>
-    )
+    );
 }

@@ -21,7 +21,7 @@ export const SucessMessageAlert: React.FC<SucessMessageProps> = ({ SuccessMessag
 export const MessageAlertModal: React.FC<ModalConfirm> = ({ isOpen, onCancel, title, message }) => {
     return (
         <div className={`${isOpen ? 'flex' : 'hidden'}
-                         overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center cursor-default items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}>
+                         overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-55 justify-center cursor-default items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}>
 
             <div className="fixed inset-0 z-50 flex items-center px-5 justify-center bg-black/30 backdrop-blur-sm">
                 <div className="relative bg-[#f3f3f3] rounded-lg px-4 py-1">
