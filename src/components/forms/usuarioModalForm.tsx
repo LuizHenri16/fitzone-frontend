@@ -48,16 +48,18 @@ export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                         setSubmitting(true);
                                         api.post("/user", values)
                                             .then(response => {
-                                                setSuccessMessage("Usuário cadastrado com sucesso");
-                                                setSuccessMessageModalIsOpen(true);
+                                                if (response.status === 201) {
+                                                    setSuccessMessage("Usuário cadastrado com sucesso");
+                                                    setSuccessMessageModalIsOpen(true);
 
-                                                resetForm();
-                                                setSubmitting(false);
+                                                    resetForm();
+                                                    setSubmitting(false);
 
-                                                setTimeout(() => {
-                                                    onClose();
-                                                    setSuccessMessageModalIsOpen(false)
-                                                }, 2000);
+                                                    setTimeout(() => {
+                                                        onClose();
+                                                        setSuccessMessageModalIsOpen(false)
+                                                    }, 2000);
+                                                }
                                             })
                                             .catch(error => {
                                                 if (error.response) {

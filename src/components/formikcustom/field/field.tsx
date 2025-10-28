@@ -1,11 +1,11 @@
 'use client'
 
 import { InputMask } from "@react-input/mask";
-import { Field, useField } from "formik";
+import { Field, FieldInputProps, FieldProps, useField } from "formik";
 
 
 // Text Field Component
-interface TextFieldProps {
+interface CustomFieldProps {
     name: string;
     label?: string;
     mask?: string;
@@ -21,7 +21,7 @@ const themes = {
     filled: "rounded-2xl",
 }
 
-export const TextField: React.FC<TextFieldProps> = ({ name, htmlFor, label, type, placeholder, theme = "filled", mask }) => {
+export const TextField: React.FC<CustomFieldProps> = ({ name, htmlFor, label, type, placeholder, theme = "filled", mask}) => {
     const [field, meta, helpers] = useField(name);
     const baseTheme = "w-full shadow-md bg-white px-5 py-3 text-[#6B3E23] font-medium outline-none text-center";
     const selectedTheme = themes[theme] || themes.lined
