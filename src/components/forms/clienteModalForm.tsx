@@ -4,8 +4,8 @@ import { Button } from "../button";
 import * as Yup from "yup";
 import { SelectField, TextField } from "../formikcustom/field";
 import { ErrorMessageAlert, MessageAlertModal } from "../alerts";
-import axios from "axios";
 import api from "@/services/api";
+import { useRouter } from "next/navigation";
 
 interface ModalProps {
     isOpen: boolean;
@@ -57,16 +57,18 @@ export const ClienteModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
 
                             api.post("/customer", values)
                                 .then(response => {
-                                    setSuccessMessage("Aluno cadastrado com sucesso");
-                                    setSuccessMessageModalIsOpen(true);
+                                    if (response.status === 200) {
+                                        setSuccessMessage("Aluno cadastrado com sucesso");
+                                        setSuccessMessageModalIsOpen(true);
 
-                                    resetForm();
-                                    setSubmitting(false);
+                                        resetForm();
+                                        setSubmitting(false);
 
-                                    setTimeout(() => {
-                                        onClose();
-                                        setSuccessMessageModalIsOpen(false)
-                                    }, 2000);
+                                        setTimeout(() => {
+                                            onClose();
+                                            setSuccessMessageModalIsOpen(false)
+                                        }, 2000);
+                                    }
                                 })
                                 .catch(error => {
                                     if (error.response) {

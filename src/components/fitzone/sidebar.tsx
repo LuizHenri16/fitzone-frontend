@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { Button, SidebarButton } from "../button";
 import { useState } from "react";
+import { logoutUser } from "@/services/auth/authService";
 
 interface SidebarProps {
   onAbrirModal?: () => void;
@@ -9,6 +10,11 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  const handleLogout = () => {
+    logoutUser()
+    router.push("/login")
+  }
 
   const [clienteCadastroModalIsOpen, setClienteCadastroModalIsOpen] = useState(false);
 
@@ -27,7 +33,7 @@ export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
           <SidebarButton name="Administrador" onClick={() => router.push("/administrador")} urlIcon="/icons/administrador-icon.svg" altIcon="Sidebarbutton icone" />
         </div>
         <div className="w-full mt-auto">
-          <Button name="Sair" theme="red" onClick={() => router.push("/login")} />
+          <Button name="Sair" theme="red" onClick={handleLogout} />
         </div>
       </div>
 
@@ -59,7 +65,7 @@ export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
 
             <div className="w-full flex justify-center mb-5">
               <div className="max-w-md w-full">
-                <Button name="Sair" theme="red" onClick={() => router.push("/login")} />
+                <Button name="Sair" theme="red" onClick={handleLogout} />
               </div>
             </div>
           </div>

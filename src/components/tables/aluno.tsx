@@ -79,18 +79,20 @@ export const TableAlunos: React.FC = () => {
     }, []);
 
     const deletarAluno = async (id: string) => {
-        try {
-            const response = await axios.delete(`http://localhost:8080/customer/${id}`);
-            if (response.status === 200) {
-                setSuccessMessage("Aluno deletado com sucesso");
-                setSuccessMessageModalIsOpen(true);
-                setAlunoDeletar(null);
-                fetchAlunos(currentPage);
-            }
-        } catch (error) {
-            setErrorMessage("Ocorreu um erro ao deletar o aluno");
-            setErrorMessageModalIsOpen(true);
-        }
+
+        api.delete(`/customer/${id}`)
+            .then(response => {
+                if (response.status === 200) {
+                    setSuccessMessage("Aluno deletado com sucesso");
+                    setSuccessMessageModalIsOpen(true);
+                    setAlunoDeletar(null);
+                    fetchAlunos(currentPage);
+                }
+            })
+            .catch(error => {
+                setErrorMessage("Ocorreu um erro ao deletar o aluno");
+                setErrorMessageModalIsOpen(true);
+            })
     };
 
     const handlePageChange = (newPage: number) => {

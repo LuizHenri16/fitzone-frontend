@@ -1,5 +1,6 @@
 'use client'
 
+import api from "@/services/api";
 import React, { useEffect, useState } from "react";
 
 interface BirthdayPersonName {
@@ -10,15 +11,15 @@ export const BirthdayStatus = () => {
 
     const [birthday, setBirthday] = useState<BirthdayPersonName[]>([]);
 
-    const dataFromDB: BirthdayPersonName[] = [
-            { name: "Maria Clara" },
-            { name: "Luiz Henrique" }
-        ];
-
     useEffect(() => {
-        
-        setBirthday(dataFromDB);
-        // lógica para acessar o endpoint e retornar os dados do banco de dados com o nome dos aniversariantes do dia
+        api.get("/customer/birthday")
+        .then(response => {
+            if (response.status === 200) {
+                setBirthday([response.data])
+            }
+        })
+        .catch(error => {
+        })
     }, [])
 
     return (

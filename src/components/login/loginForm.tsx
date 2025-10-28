@@ -6,7 +6,7 @@ import { Formik, Form } from "formik"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import * as Yup from "yup"
-import { loginUser } from "@/services/authService"
+import { loginUser } from "@/services/auth/authService"
 
 export const LoginForm: React.FC = () => {
 
@@ -41,7 +41,7 @@ export const LoginForm: React.FC = () => {
 
                     router.push("/inicio")
                 } catch (error: any) {
-                        const message = error.response?.message || "Erro desconhecido";
+                        const message = error.response?.data?.message || "Erro desconhecido";
                         setErrorMessage(message);
                         setErrorMessageModalIsOpen(true);
                     

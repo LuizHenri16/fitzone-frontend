@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup"
 import { SelectField, TextField } from "../formikcustom/field";
 import { Button } from "../button";
-import { ErrorMessageAlert } from "../alerts";
+import { ErrorMessageAlert, MessageAlertModal } from "../alerts";
 import api from "@/services/api";
 import { useState } from "react";
 
@@ -32,15 +32,15 @@ export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                             <Formik
                                 initialValues={
                                     {
-                                        nome: "", senha: "", confirmaSenha: "", nivelAcesso: ""
+                                        username: "", password: "", confirmPassword: "", access: ""
                                     }}
                                 validationSchema={
                                     Yup.object(
                                         {
-                                            nome: Yup.string().required("Campo de nome obrigatório"),
-                                            senha: Yup.string().required("Campo de senha obrigatório"),
-                                            confirmaSenha: Yup.string().oneOf([Yup.ref('senha'), undefined], 'As senhas devem corresponder').required('Confirmação de senha é obrigatória'),
-                                            nivelAcesso: Yup.string().oneOf(["Total", "Parcial"], "Selecione um nível de acesso")
+                                            username: Yup.string().required("Campo de nome obrigatório"),
+                                            password: Yup.string().required("Campo de senha obrigatório"),
+                                            confirmPassword: Yup.string().oneOf([Yup.ref('password'), undefined], 'As senhas devem corresponder').required('Confirmação de senha é obrigatória'),
+                                            access: Yup.string().oneOf(["Total", "Parcial"], "Selecione um nível de acesso")
                                         }
                                     )}
                                 onSubmit={
@@ -71,20 +71,20 @@ export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                     <Form className="">
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                                             <div>
-                                                <TextField label="Nome de Usuário" name="nome" theme="lined" placeholder="Digite o nome do aluno" type="text" />
-                                                <ErrorMessageAlert name="nome" component='div' />
+                                                <TextField label="Nome de Usuário" name="username" theme="lined" placeholder="Digite o nome do aluno" type="text" />
+                                                <ErrorMessageAlert name="username" component='div' />
                                             </div>
                                             <div>
-                                                <TextField label="Senha" name="senha" theme="lined" placeholder="Digite o nome do aluno" type="password" />
-                                                <ErrorMessageAlert name="senha" component='div' />
+                                                <TextField label="Senha" name="password" theme="lined" placeholder="Digite o nome do aluno" type="password" />
+                                                <ErrorMessageAlert name="password" component='div' />
                                             </div>
                                             <div>
-                                                <TextField label="Confirmar Senha" name="confirmaSenha" theme="lined" placeholder="Digite o nome do aluno" type="password" />
-                                                <ErrorMessageAlert name="confirmaSenha" component='div' />
+                                                <TextField label="Confirmar Senha" name="confirmPassword" theme="lined" placeholder="Digite o nome do aluno" type="password" />
+                                                <ErrorMessageAlert name="confirmPassword" component='div' />
                                             </div>
                                             <div className="">
-                                                <SelectField theme="lined" name="nivelAcesso" htmlFor="nivelAcesso" label="Nível de Acesso" options={["Selecionar", "Total", "Parcial"]} />
-                                                <ErrorMessageAlert name="nivelAcesso" component='div' />
+                                                <SelectField theme="lined" name="access" htmlFor="nivelAcesso" label="Nível de Acesso" options={["Selecionar", "Total", "Parcial"]} />
+                                                <ErrorMessageAlert name="access" component='div' />
                                             </div>
                                         </div>
 
@@ -99,6 +99,8 @@ export const UsuarioModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                     </div>
                 </div>
             )}
+            {SuccessMessageModalIsOpen && (<MessageAlertModal title="Sucesso" message={SucessMessage} isOpen={true} onCancel={() => setSuccessMessageModalIsOpen(false)} />)}
+            {ErrorMessageModalIsOpen && (<MessageAlertModal title="Erro" message={ErrorMessage} isOpen={true} onCancel={() => setErrorMessageModalIsOpen(false)} />)}
         </div>
     )
 }
