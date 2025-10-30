@@ -3,11 +3,18 @@ import { Spinner } from "../fitzone";
 import api from "@/services/api";
 
 interface Pagamento {
-    id: string,
-    nomePagador: string,
-    valor: number,
-    emailPagador: string,
-    dataPagamento: string
+    id: number,
+    lastPayment: string
+    customer: {
+        name: string,
+        email: string,
+        license: {
+            license: string,
+            price: number,
+            id: number
+        },
+
+    }
 }
 
 interface PageableInfo {
@@ -84,6 +91,7 @@ export const TablePagamentos: React.FC = () => {
                             <th scope="col" className="font-medium text-[#6B3E23] px-4 py-2 border-b-1 border-gray-300">ID</th>
                             <th scope="col" className="font-medium text-[#6B3E23] px-4 py-2 border-b-1 border-gray-300">Aluno</th>
                             <th scope="col" className="font-medium text-[#6B3E23] px-4 py-2 border-b-1 border-gray-300">Valor</th>
+                            <th scope="col" className="font-medium text-[#6B3E23] px-4 py-2 border-b-1 border-gray-300">Ultimo Pagamento</th>
                             <th scope="col" className="font-medium text-[#6B3E23] px-4 py-2 border-b-1 border-gray-300">Email Pagador</th>
                         </tr>
                     </thead>
@@ -91,25 +99,31 @@ export const TablePagamentos: React.FC = () => {
                     <tbody className="text-center">
                         {loadingTable ? (
                             <tr>
-                                <td colSpan={4} className="text-center py-4"><Spinner /></td>
+                                <td colSpan={5} className="text-center py-4"><Spinner /></td>
                             </tr>
                         ) : pagamentos.length === 0 ? (
                             <tr>
-                                <td colSpan={4} className="text-center py-4">Nenhum pagamento encontrado</td>
+                                <td colSpan={5} className="text-center py-4">Nenhum pagamento encontrado</td>
                             </tr>
                         ) : (
                             pagamentos.map((pagamento) => (
                                 <tr key={pagamento.id} className="bg-white transition-colors cursor-pointer">
                                     <td className="font-semibold px-4 py-4 ">{pagamento.id}</td>
-                                    <td className="font-medium px-4 py-4 ">{pagamento.nomePagador}</td>
-                                    {/* Formatação para Moeda Brasileira (R$) */}
+                                    <td className="font-medium px-4 py-4 ">{pagamento.customer.name}</td>
                                     <td className="font-medium px-4 py-4 ">
                                         {new Intl.NumberFormat('pt-BR', {
                                             style: 'currency',
                                             currency: 'BRL',
-                                        }).format(pagamento.valor)}
+                                        }).format(pagamento.customer.license.price)}
                                     </td>
-                                    <td className="font-medium px-4 py-4 ">{pagamento.emailPagador}</td>
+                                    <td className="font-medium px-4 py-4">
+                                        {new Date(pagamento.lastPayment).toLocaleDateString('pt-BR', {
+                                            year: 'numeric',
+                                            month: '2-digit',
+                                            day: '2-digit',
+                                        })}
+                                    </td>
+                                    <td className="font-medium px-4 py-4 ">{pagamento.customer.email}</td>
                                 </tr>
                             ))
                         )}
