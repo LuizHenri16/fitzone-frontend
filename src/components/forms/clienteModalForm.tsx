@@ -57,7 +57,7 @@ export const ClienteModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
 
                             api.post("/customer", values)
                                 .then(response => {
-                                    if (response.status === 200) {
+                                    if (response.status === 201) {
                                         setSuccessMessage("Aluno cadastrado com sucesso");
                                         setSuccessMessageModalIsOpen(true);
 
