@@ -9,9 +9,9 @@ interface TemplateProps {
 
 export const Template: React.FC<TemplateProps> = ({ children, pagename, onAbrirModal }) => {
     return (
-        <div className="flex flex-col lg:flex-row min-h-screen">
+        <div className="flex flex-1 flex-col lg:flex-row min-h-screen">
                 <Sidebar onAbrirModal={onAbrirModal}/>    
-                <main className="flex-1 justify-center  p-6 w-full ">
+                <main className=" justify-center  p-6 w-full h-screen overflow-y-auto">
                     <h2 className="font-bold text-3xl text-right text-[#116343]">{pagename}</h2>   
                     <div className="mt-10 md:px-5 lg:px-20">
                         {children}
