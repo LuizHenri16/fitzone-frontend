@@ -45,7 +45,7 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
             api.get<ClienteDetalhe[]>("/customer/payment")
                 .then((response) => setListaClientes(response.data))
                 .catch((error) => {
-                    console.error("Erro ao carregar clientes:", error);
+
                 });
         }
     }, [isOpen]);
@@ -65,11 +65,10 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
         }
 
         try {
-            const response = await api.get<ClienteDetalhe>(`/customer/${clienteId}`);
-            const data = response.data;
+            const response = await api.get<{customer: ClienteDetalhe}>(`/customer/${clienteId}`);
+            const data = response.data.customer;
             setClienteDetalhe(data);
 
-            // Atualiza os campos diretamente
             setFieldValue(
                 "lastPayment",
                 data.lastPayment

@@ -11,9 +11,6 @@ import { loginUser } from "@/services/auth/authService"
 export const LoginForm: React.FC = () => {
 
     const router = useRouter();
-    const [SucessMessage, setSuccessMessage] = useState("");
-    const [SuccessMessageModalIsOpen, setSuccessMessageModalIsOpen] = useState(false);
-
     const [ErrorMessage, setErrorMessage] = useState("");
     const [ErrorMessageModalIsOpen, setErrorMessageModalIsOpen] = useState(false);
 
@@ -41,10 +38,9 @@ export const LoginForm: React.FC = () => {
 
                     router.push("/inicio")
                 } catch (error: any) {
-                        const message = error.response?.data?.message || "Erro desconhecido";
-                        setErrorMessage(message);
-                        setErrorMessageModalIsOpen(true);
-                    
+                    const message = error.response?.data?.message || "Servidor não está respondendo";
+                    setErrorMessage(message);
+                    setErrorMessageModalIsOpen(true);
                 }
 
             }} >
@@ -63,7 +59,6 @@ export const LoginForm: React.FC = () => {
                             <ErrorMessageAlert name="password" component='div' />
                         </div>
                         <Button name="login" type="submit" disabled={isSubmitting} theme="beige" />
-                        {SucessMessage && <SucessMessageAlert SuccessMessage={SucessMessage} />}
                         {ErrorMessageModalIsOpen && (<MessageAlertModal title="Erro" message={ErrorMessage} isOpen={true} onCancel={() => setErrorMessageModalIsOpen(false)} />)}
                     </div>
                 </Form>

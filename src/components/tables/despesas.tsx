@@ -111,7 +111,12 @@ export const TableDespesas: React.FC = () => {
                                                 currency: 'BRL',
                                             }).format(despesa.value)}
                                         </td>
-                                        <td className="font-medium px-4 py-4 ">{despesa.date}</td>
+                                        <td className="font-medium px-4 py-4 ">
+                                            {new Date(despesa.date).toLocaleDateString('pt-BR', {
+                                                year: 'numeric',
+                                                month: '2-digit',
+                                                day: '2-digit',
+                                            })}</td>
                                     </tr>
                                 ))
                             )

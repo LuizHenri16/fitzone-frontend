@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, ClienteModalForm, DespesaModalForm, PagamentoModalForm, TableDespesas, TablePagamentos, Template, TotalDespesasBox, TotalPagamentosBox, TotalReceitaBox } from "@/components";
+import { Button, ClienteModalForm, DespesaModalForm, PagamentoModalForm, TableDespesas, TablePagamentos, Template, FinanceBoxes } from "@/components";
 import { useState } from "react";
 
 export default function FinanceiroPage() {
@@ -14,10 +14,8 @@ export default function FinanceiroPage() {
                 
             <div className="flex flex-col gap-4">
                 <h2 className="font-bold text-[#6B3E23]">Resumo Geral</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    <TotalReceitaBox />
-                    <TotalPagamentosBox />
-                    <TotalDespesasBox />
+                <div className="w-full">
+                    <FinanceBoxes />
                 </div>
             </div>
 

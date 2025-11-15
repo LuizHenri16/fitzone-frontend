@@ -57,7 +57,7 @@ export const ClienteEditarModalForm: React.FC<ModalProps> = ({ isOpen = false, o
 
             api.get(`/customer/${idAluno}`)
                 .then((response) => {
-                    const data = response.data;
+                    const data = response.data.customer;
                     const alunoComBirthday = {
                         ...data,
                         birthday: data.customerBirthDay
@@ -94,7 +94,7 @@ export const ClienteEditarModalForm: React.FC<ModalProps> = ({ isOpen = false, o
                         initialValues={{
                             id: alunoEditar.id,
                             name: alunoEditar.name,
-                            cpf: alunoEditar.cpf ?? "", // Corrigido para carregar o CPF da API
+                            cpf: alunoEditar.cpf ?? "",
                             birthday: formatIsoToMaskedDate(alunoEditar.birthday),
                             telephoneNumber: alunoEditar.customerContact.telephoneValue,
                             emergencyTelephoneNumber: alunoEditar.customerContact.emergencyTelephoneValue,

@@ -9,27 +9,27 @@ export const StatusCustomers = () => {
     useEffect(() => {
         api.get("/customer/activecustomers")
             .then(response => {
-                setActiveCustomers(response.data)
+                setActiveCustomers(response.data.ativos);
             })
             .catch(error => {
-
-            })
+                setActiveCustomers(0);
+            });
 
         api.get("/customer/registeredcustomers")
             .then(response => {
-                setRegisteredCustomers(response.data)
+                setRegisteredCustomers(response.data.registrados);
             })
             .catch(error => {
-
-            })
-    })
+                setRegisteredCustomers(0); 
+            });
+    }, [])
 
     return (
         <div className="shadow-md rounded-2xl border-2 border-[#C1C1C1] overflow-x-auto w-full mx-auto">
             <table className="text-center w-full">
                 <thead >
                     <tr className="bg-[#F3F3F3] border-b-2 border-b-[#C1C1C1]">
-                        <th className="p-1 text-[#6B3E23]"> Estatíticas do Sistema </th>
+                        <th className="p-1 text-[#6B3E23]"> Estatísticas do Sistema </th>
                     </tr>
                 </thead>
 
@@ -40,7 +40,7 @@ export const StatusCustomers = () => {
                                 <div>
                                     <img src="/icons/pessoas-icon.svg" alt="pessoas icone" />
                                 </div>
-                                <p className="text-[#B77306] font-medium text-lg">{registeredCustomers}</p>
+                                <p className="text-[#B77306] font-medium text-lg">{registeredCustomers || 0}</p>
                                 <p className="font-light text-[#7E7E7E]">Alunos Cadastrados</p>
                             </div>
 
@@ -48,7 +48,7 @@ export const StatusCustomers = () => {
                                 <div>
                                     <img src="/icons/pessoas-icon.svg" alt="pessoas icone" />
                                 </div>
-                                <p className="text-[#B77306] font-medium text-lg">{activeCustomers}</p>
+                                <p className="text-[#B77306] font-medium text-lg">{activeCustomers || 0}</p>
                                 <p className="font-light text-[#7E7E7E]">Alunos Ativos</p>
                             </div>
                         </td>
