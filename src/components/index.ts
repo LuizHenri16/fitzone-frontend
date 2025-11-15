@@ -16,7 +16,7 @@ export {Logo, LogoFlexRow} from './fitzone';
 export {Template} from './fitzone';
 export {Sidebar} from "./fitzone"
 export {Spinner} from "./fitzone"
-export {BirthdayStatus, StatusCustomers, TotalReceitaBox, TotalDespesasBox, TotalPagamentosBox} from "./stats"
+export {BirthdayStatus, StatusCustomers, FinanceBoxes} from "./stats"
 
 // TABLES COMPONENT
 export {TableAlunos, TableUsuarios, TablePagamentos, TableDespesas} from "./tables"
