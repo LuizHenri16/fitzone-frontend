@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Spinner } from "../fitzone";
 import api from "@/services/api";
+import { MessageAlertModal } from "../alerts";
 
 interface Despesa {
     id: string;
@@ -43,6 +44,9 @@ export const TableDespesas: React.FC = () => {
     const [pageData, setPageData] = useState<DespesasPage>(initialPageData);
     const [currentPage, setCurrentPage] = useState(0);
 
+    const [errorMessage, setErrorMessage] = useState("");
+    const [errorMessageModalIsOpen, setErrorMessageModalIsOpen] = useState(false);
+
     const fetchDespesas = async (page: number) => {
         setLoadingTable(true);
         const pageSize = 10;
@@ -56,8 +60,8 @@ export const TableDespesas: React.FC = () => {
             setPageData(backendData);
             setCurrentPage(backendData.number);
         } catch (error) {
-            console.error("Erro ao buscar despesas:", error);
-
+            setErrorMessage("Ocorreu um erro ao deletar o usuário");
+            setErrorMessageModalIsOpen(true);
         } finally {
             setLoadingTable(false);
         }
@@ -90,7 +94,6 @@ export const TableDespesas: React.FC = () => {
                     </thead>
 
                     <tbody className="text-center">
-
                         {loadingTable ? (
                             <tr >
                                 <td colSpan={4} className="text-center py-4"><Spinner /></td>
@@ -112,7 +115,7 @@ export const TableDespesas: React.FC = () => {
                                             }).format(despesa.value)}
                                         </td>
                                         <td className="font-medium px-4 py-4 ">
-                                            {new Date(despesa.date).toLocaleDateString('pt-BR', {
+                                            {new Date(despesa.date + 'T12:00:00').toLocaleDateString('pt-BR', {
                                                 year: 'numeric',
                                                 month: '2-digit',
                                                 day: '2-digit',
@@ -154,6 +157,14 @@ export const TableDespesas: React.FC = () => {
                             Próximo
                         </button>
                     </div>
+                )}
+                {errorMessageModalIsOpen && (
+                    <MessageAlertModal
+                        title="Erro"
+                        message={errorMessage}
+                        isOpen={true}
+                        onCancel={() => setErrorMessageModalIsOpen(false)}
+                    />
                 )}
             </div>
         </div>

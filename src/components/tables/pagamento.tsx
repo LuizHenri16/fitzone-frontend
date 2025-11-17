@@ -117,7 +117,8 @@ export const TablePagamentos: React.FC = () => {
                                         }).format(pagamento.customer.license.price)}
                                     </td>
                                     <td className="font-medium px-4 py-4">
-                                        {new Date(pagamento.lastPayment).toLocaleDateString('pt-BR', {
+                                        {
+                                        new Date(pagamento.lastPayment + 'T12:00:00').toLocaleDateString('pt-BR', {
                                             year: 'numeric',
                                             month: '2-digit',
                                             day: '2-digit',
