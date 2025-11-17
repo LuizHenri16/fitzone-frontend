@@ -5,6 +5,7 @@ import { Button } from "../button";
 import { ErrorMessageAlert, MessageAlertModal } from "../alerts";
 import api from "@/services/api";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface ModalProps {
     isOpen: boolean,
@@ -18,6 +19,8 @@ export const DespesaModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
 
     const [ErrorMessage, setErrorMessage] = useState("");
     const [ErrorMessageModalIsOpen, setErrorMessageModalIsOpen] = useState(false);
+
+    const router = useRouter();
 
     if (!isOpen) return null;
     return (
@@ -55,10 +58,10 @@ export const DespesaModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
 
                                                     resetForm();
                                                     setSubmitting(false);
+
                                                     setTimeout(() => {
                                                         onClose();
                                                         setSuccessMessageModalIsOpen(false)
-
                                                     }, 2000);
                                                 }
                                             })
@@ -97,7 +100,6 @@ export const DespesaModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                     </Form>
                                 )}
                             </Formik>
-
                         </div>
                     </div>
                     {SucessMessageModalIsOpen && (<MessageAlertModal title="Sucesso" message={SucessMessage} isOpen={true} onCancel={() => setSuccessMessageModalIsOpen(false)} />)}

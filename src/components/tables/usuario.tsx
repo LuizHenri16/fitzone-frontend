@@ -56,10 +56,6 @@ export const TableUsuarios: React.FC = () => {
                 setErrorMessage("Ocorreu um erro ao deletar o usuário");
                 setErrorMessageModalIsOpen(true);
             })
-
-
-
-
     };
     return (
         <div>

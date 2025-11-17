@@ -14,7 +14,7 @@ interface ClienteDetalhe {
         license: string;
         price: number;
     };
-    lastPayment: string | null;
+    lastPaymentDate: string | null;
 }
 
 interface ModalProps {
@@ -24,7 +24,7 @@ interface ModalProps {
 
 interface PagamentoValues {
     clienteId: string;
-    lastPayment: string;
+    lastPaymentDate: string;
     license: string;
     price: string;
     newPayment: string;
@@ -71,8 +71,8 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
 
             setFieldValue(
                 "lastPayment",
-                data.lastPayment
-                    ? new Date(data.lastPayment).toLocaleDateString("pt-BR")
+                data.lastPaymentDate
+                    ? new Date(data.lastPaymentDate + 'T12:00:00').toLocaleDateString("pt-BR")
                     : "Não encontrado"
             );
             setFieldValue("license", data.license.license);
@@ -84,7 +84,6 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
                 })
             );
         } catch (error) {
-            console.error("Erro ao buscar detalhes do cliente:", error);
             setClienteDetalhe(null);
         }
     };
@@ -127,7 +126,7 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
 
     const initialValues: PagamentoValues = {
         clienteId: "",
-        lastPayment: "",
+        lastPaymentDate: "",
         license: "",
         price: "",
         newPayment: new Date().toLocaleDateString("pt-BR"),
@@ -163,7 +162,6 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
                                 {({ isSubmitting, setFieldValue, values }) => (
                                     <Form>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                                            {/* Select Cliente */}
                                             <div className="flex flex-col gap-1">
                                                 <label className="font-bold text-lg text-[#6B3E23]">
                                                     Cliente
