@@ -44,7 +44,7 @@ export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
     <>
       <div className="hidden lg:items-center lg:flex lg:flex-col lg:w-64 lg:py-6 lg:px-4 border-r-3 border-r-[#F3F3F3]">
         <div className="w-full bg-white shadow-md rounded-2xl p-2">
-          <p className="font-bold text-lg text-[#6B3E23]">Usuário: </p>
+          <p className="font-bold text-lg text-[#6B3E23]">Usuário: {user.username} </p>
         </div>
         <div className="flex flex-col gap-5 mt-auto">
           <SidebarButton name="Início" onClick={() => router.push("/inicio")} urlIcon="/icons/inicio-icon.svg" altIcon="Sidebarbutton icone" />
@@ -72,7 +72,7 @@ export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
 
             <div className="w-full max-w-md">
               <div className="flex justify-between items-center gap-6">
-                <p className="bg-white p-3 rounded-2xl font-bold text-lg text-[#6B3E23] whitespace-nowrap">Usuário:</p>
+                <p className="bg-white p-3 rounded-2xl font-bold text-lg text-[#6B3E23] whitespace-nowrap">Usuário: {user.username}</p>
                 <button onClick={() => {setIsOpen(false), setClienteCadastroModalIsOpen(false)} } className="text-3xl hover:text-[#c5c5c5] cursor-pointer">✕</button>
               </div>
             </div>

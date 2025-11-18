@@ -3,8 +3,13 @@ import { ActionButton } from "../button";
 import { Spinner } from "../fitzone";
 import { ClienteEditarModalForm } from "../forms";
 import { MessageAlertModal, ModalConfirm } from "../alerts";
-import axios from "axios";
 import api from "@/services/api";
+
+interface User {
+    id: number,
+    username: string,
+    access: string
+}
 
 interface Aluno {
     id: string;
@@ -54,6 +59,16 @@ export const TableAlunos: React.FC = () => {
     const [clienteEditarModalIsOpen, setClienteEditarModalIsOpen] = useState(false);
     const [alunoSelecionadoParaEdicao, setAlunoSelecionadoParaEdicao] = useState<Aluno | null>(null);
     const [alunoDeletar, setAlunoDeletar] = useState<Aluno | null>(null);
+
+    const [user, setUser] = useState<User>({} as User);
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
 
     const fetchAlunos = async (page: number) => {
         setLoadingTable(true);
@@ -131,11 +146,13 @@ export const TableAlunos: React.FC = () => {
                                     <td className="font-medium px-4 py-4">{aluno.name}</td>
                                     <td className={`font-bold ${aluno.status === 'Ativo' ? 'text-green-900' : 'text-red-900'}`}>{aluno.status}</td>
                                     <td className="w-full flex justify-center gap-3 items-center font-medium px-4 py-4">
-                                        <ActionButton action="edit" onClick={() => {
-                                            setAlunoSelecionadoParaEdicao(aluno);
-                                            setClienteEditarModalIsOpen(true);
-                                        }} />
-                                        <ActionButton action="delete" onClick={() => setAlunoDeletar(aluno)} />
+                                        {user.access === "Total" && <>
+                                            <ActionButton action="edit" onClick={() => {
+                                                setAlunoSelecionadoParaEdicao(aluno);
+                                                setClienteEditarModalIsOpen(true);
+                                            }} />
+                                            <ActionButton action="delete" onClick={() => setAlunoDeletar(aluno)} />
+                                        </>}
                                     </td>
                                 </tr>
                             ))
