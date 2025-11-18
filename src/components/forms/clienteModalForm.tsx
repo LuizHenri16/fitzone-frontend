@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import { SelectField, TextField } from "../formikcustom/field";
 import { ErrorMessageAlert, MessageAlertModal } from "../alerts";
 import api from "@/services/api";
-import { useRouter } from "next/navigation";
 
 interface ModalProps {
     isOpen: boolean;
@@ -18,8 +17,6 @@ export const ClienteModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
 
     const [ErrorMessage, setErrorMessage] = useState("");
     const [ErrorMessageModalIsOpen, setErrorMessageModalIsOpen] = useState(false);
-
-    
 
     if (!isOpen) return null;
 
@@ -69,6 +66,7 @@ export const ClienteModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                         setTimeout(() => {
                                             onClose();
                                             setSuccessMessageModalIsOpen(false)
+                                            window.location.reload()
                                         }, 2000);
                                     }
                                 })
@@ -79,9 +77,9 @@ export const ClienteModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                         setErrorMessageModalIsOpen(true);
                                     }
                                 })
-                                
-                                    
-                                
+
+
+
                         }}
                     >
                         {({ isSubmitting }) => (

@@ -1,15 +1,37 @@
 import { useRouter } from "next/navigation";
 import { Button, SidebarButton } from "../button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { logoutUser } from "@/services/auth/authService";
 
 interface SidebarProps {
   onAbrirModal?: () => void;
 }
 
+interface User {
+  id:number,
+  username: string,
+  access:string
+}
+
 export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  const [user, setUser] = useState<User>({} as User);
+
+  useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+    }, []);
+
+    const renderAdmButton = (user: User) => {
+        if (user.access === "Total") {
+            return <SidebarButton name="Administrador" onClick={() => router.push("/administrador")} urlIcon="/icons/administrador-icon.svg" altIcon="Sidebarbutton icone" />
+        }
+        return null;
+    }
 
   const handleLogout = () => {
     logoutUser()
@@ -30,7 +52,8 @@ export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
           <SidebarButton name="Lista de Alunos" onClick={() => router.push("/aluno")} urlIcon="/icons/listaraluno-icon.svg" altIcon="Sidebarbutton icone" />
           <SidebarButton name="Financeiro" onClick={() => router.push("/financeiro")} urlIcon="/icons/financeiro-icon.svg" altIcon="Sidebarbutton icone" />
           <SidebarButton name="Ficha de Treino" onClick={() => router.push("/fichadetreino")} urlIcon="/icons/fichadetreino-icon.svg" altIcon="Sidebarbutton icone" />
-          <SidebarButton name="Administrador" onClick={() => router.push("/administrador")} urlIcon="/icons/administrador-icon.svg" altIcon="Sidebarbutton icone" />
+          {renderAdmButton(user)}
+          
         </div>
         <div className="w-full mt-auto">
           <Button name="Sair" theme="red" onClick={handleLogout} />
@@ -60,7 +83,7 @@ export const Sidebar: React.FC<SidebarProps> = ({onAbrirModal}) => {
               <SidebarButton name="Lista de Alunos" onClick={() => router.push("/aluno")} urlIcon="/icons/listaraluno-icon.svg" altIcon="Sidebarbutton icone" />
               <SidebarButton name="Financeiro" onClick={() => router.push("/financeiro")} urlIcon="/icons/financeiro-icon.svg" altIcon="Sidebarbutton icone" />
               <SidebarButton name="Ficha de Treino" onClick={() => router.push("/fichadetreino")} urlIcon="/icons/fichadetreino-icon.svg" altIcon="Sidebarbutton icone" />
-              <SidebarButton name="Administrador" onClick={() => router.push("/administrador")} urlIcon="/icons/administrador-icon.svg" altIcon="Sidebarbutton icone" />
+              {renderAdmButton(user)}
             </div>
 
             <div className="w-full flex justify-center mb-5">

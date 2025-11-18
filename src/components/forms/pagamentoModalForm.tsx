@@ -111,6 +111,7 @@ export const PagamentoModalForm: React.FC<ModalProps> = ({ isOpen = false, onClo
                 setTimeout(() => {
                     setSuccessMessageModalIsOpen(false);
                     onClose();
+                     window.location.reload()
                 }, 2000);
             }
         } catch (error: any) {

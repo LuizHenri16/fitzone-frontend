@@ -109,6 +109,7 @@ export const UsuarioEditarModalForm: React.FC<ModalProps> = ({ isOpen = false, o
 
                                         setTimeout(() => {
                                             onClose();
+                                            window.location.reload()
                                         }, 2000);
                                     }
                                 })
