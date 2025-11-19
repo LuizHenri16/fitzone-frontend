@@ -82,8 +82,10 @@ export const TableAlunos: React.FC = () => {
             const backendData: AlunosPage = response.data;
             setPageData(backendData);
             setCurrentPage(backendData.number);
+
         } catch (error) {
-            console.error("Erro ao buscar alunos:", error);
+            setErrorMessage("Erro ao buscar alunos:");
+            setErrorMessageModalIsOpen(true);
         } finally {
             setLoadingTable(false);
         }
