@@ -63,6 +63,7 @@ export const ClienteEditarModalForm: React.FC<ModalProps> = ({ isOpen = false, o
                         birthday: data.customerBirthDay
                     };
                     setAlunoEditar(alunoComBirthday);
+                    
                 })
                 .catch((error) => {
                     if (error.response) {
@@ -139,8 +140,8 @@ export const ClienteEditarModalForm: React.FC<ModalProps> = ({ isOpen = false, o
                                         setSubmitting(false);
                                         setTimeout(() => {
                                             onClose();
-                                            setSuccessMessageModalIsOpen(false)
-
+                                            setSuccessMessageModalIsOpen(false);
+                                            window.location.reload();
                                         }, 2000);
                                     }
                                 })

@@ -62,6 +62,7 @@ export const DespesaModalForm: React.FC<ModalProps> = ({ isOpen = false, onClose
                                                     setTimeout(() => {
                                                         onClose();
                                                         setSuccessMessageModalIsOpen(false)
+                                                         window.location.reload()
                                                     }, 2000);
                                                 }
                                             })
